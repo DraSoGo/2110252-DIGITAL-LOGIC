@@ -9,3 +9,4 @@ desktop.ini
 *.log
 .agent-spec.md
 .playwright-mcp/
+.worktrees/
