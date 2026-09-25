@@ -25,6 +25,41 @@ test('buildTree nests groups recursively', () => {
   assert.deepEqual(deep.problems.map((p) => p.id), ['Labs/Lab 3/deep/task']);
 });
 
+test('tree numbering restarts per parent (regression: Lab_01 must be 01 after Exam1 children)', () => {
+  // Two roots, each with children at the same depth — the old global counter
+  // drifted across parents (Simulation/Lab_01 became 04 after Exam1's 66/67/68).
+  const many = [
+    { id: 'Exam1/66/01', title: 'a', groupPath: ['Exam1', '66'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+    { id: 'Exam1/67/01', title: 'b', groupPath: ['Exam1', '67'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+    { id: 'Exam1/68/01', title: 'c', groupPath: ['Exam1', '68'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+    { id: 'Simulation/Lab_01/01', title: 'd', groupPath: ['Simulation', 'Lab_01'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+    { id: 'Simulation/Lab_02/01', title: 'e', groupPath: ['Simulation', 'Lab_02'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+    { id: 'Simulation/Lab_03/01', title: 'f', groupPath: ['Simulation', 'Lab_03'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+    { id: 'Simulation/Lab_04/01', title: 'g', groupPath: ['Simulation', 'Lab_04'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+  ];
+  const tree = buildTree(many);
+  const rootCodes = tree.map((n) => n.code);
+  assert.deepEqual(rootCodes, ['01', '02']);
+  const exam1 = tree.find((n) => n.name === 'Exam1');
+  assert.deepEqual(exam1.children.map((n) => `${n.code}:${n.name}`), ['01:66', '02:67', '03:68']);
+  const simulation = tree.find((n) => n.name === 'Simulation');
+  assert.deepEqual(simulation.children.map((n) => `${n.code}:${n.name}`), ['01:Lab_01', '02:Lab_02', '03:Lab_03', '04:Lab_04']);
+});
+
+test('tree numbering restarts at every nesting level', () => {
+  const deep = [
+    { id: 'A/B/C/01', title: 't', groupPath: ['A', 'B', 'C'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+    { id: 'A/D/01', title: 't', groupPath: ['A', 'D'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+    { id: 'A/E/01', title: 't', groupPath: ['A', 'E'], pdf: 'x.pdf', dig: null, ods: null, csv: null, hasNote: false },
+  ];
+  const tree = buildTree(deep);
+  const a = tree[0];
+  assert.equal(a.code, '01');
+  assert.deepEqual(a.children.map((n) => n.code), ['01', '02', '03']);
+  const b = a.children[0];
+  assert.deepEqual(b.children.map((n) => n.code), ['01']);
+});
+
 test('countTree counts nested problems', () => {
   const tree = buildTree(problems);
   assert.equal(countTree(tree[0]), 2);

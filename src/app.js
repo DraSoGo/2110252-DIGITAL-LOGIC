@@ -1,5 +1,6 @@
 import { buildTree, countTree, filterProblems, pageRoute, summarize } from './lib/content.js';
 import { createSvgViewer } from './lib/svg-viewer.js';
+import { TABS, isTabAvailable } from './lib/tabs.js';
 
 const app = document.querySelector('#app');
 const state = { problems: [], query: '', openGroups: new Set(), closedGroups: new Set(), sidebarOpen: false, viewer: null };
@@ -16,7 +17,6 @@ const icon = (name) => ({
   moon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5A8 8 0 0 1 8.5 4 8.2 8.2 0 1 0 20 15.5Z"/></svg>',
   external: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M19 14v6H4V5h6"/></svg>',
   download: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0 5-5m-5 5-5-5M5 20h14"/></svg>',
-  grid: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
   zap: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>',
 })[name];
 
@@ -31,13 +31,36 @@ function activeProblem() {
   return problemId ? state.problems.find((p) => p.id === problemId) || null : null;
 }
 
+/* ---------- Boot state lifecycle ---------- */
+
+function showFatal(title, message) {
+  app.innerHTML = `<div class="fatal-error" role="alert">
+    <code>PANIC: ${escapeHtml(title)}</code>
+    <h1>Atlas failed to boot</h1>
+    <p>${escapeHtml(message)}</p>
+    <button type="button" id="fatal-retry">RETRY</button>
+  </div>`;
+  document.querySelector('#fatal-retry').addEventListener('click', () => location.reload());
+}
+
+// Loading/fatal states are rendered INSIDE #app; the boot screen lives in a
+// child element, so #app itself never carries grid-centering classes and the
+// real shell always fills the viewport.
+function clearBootState() {
+  app.removeAttribute('class');
+  app.removeAttribute('role');
+  app.removeAttribute('aria-live');
+  app.removeAttribute('aria-busy');
+  app.innerHTML = '';
+}
+
 /* ---------- Shell ---------- */
 
 function shellMarkup() {
   const s = summarize(state.problems);
   return `<div class="app-shell">
     <header class="topbar">
-      <button class="menu-button" type="button" aria-label="Open navigation">${icon('menu')}</button>
+      <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false" id="menu-button">${icon('menu')}</button>
       <a class="wordmark" href="#/"><span class="prompt-mark">&gt;_</span><span><strong>2110252</strong><small>DIGITAL LOGIC</small></span></a>
       <label class="global-search">${icon('search')}<span class="sr-only">Search problems</span><input type="search" id="global-search" placeholder="Search problems..." autocomplete="off"><kbd>/</kbd></label>
       <div class="system-summary"><span>${s.problems}<small>PROBLEMS</small></span><span>${s.pdfs}<small>STATEMENTS</small></span><span>${s.digs}<small>SOLUTIONS</small></span><span>${s.notes}<small>NOTES</small></span></div>
@@ -48,15 +71,6 @@ function shellMarkup() {
       <button class="sidebar-scrim" type="button" aria-label="Close navigation"></button>
       <main id="main" tabindex="-1"></main>
     </div>
-  </div>`;
-}
-
-function fatalMarkup(title, message) {
-  return `<div class="fatal-error" role="alert">
-    <code>PANIC: ${escapeHtml(title)}</code>
-    <h1>Atlas failed to boot</h1>
-    <p>${escapeHtml(message)}</p>
-    <button type="button" id="fatal-retry">RETRY</button>
   </div>`;
 }
 
@@ -92,10 +106,9 @@ function treeNodeMarkup(node, depth, ctx) {
   if (state.query && !problems.length && !children.length) return '';
   const open = groupIsOpen(node.path, ctx.ancestors);
   const count = visibleCount(node, ctx.visibleIds);
-  const code = String(ctx.index.depth[depth] = (ctx.index.depth[depth] || 0) + 1).padStart(2, '0');
   return `<section class="tree-node ${open ? 'open' : ''}" style="--depth:${depth}">
     <button class="tree-heading" type="button" data-toggle="${escapeHtml(node.path)}" aria-expanded="${open}">
-      ${icon('chevron')}<strong><span class="tree-code">${code}</span>${escapeHtml(node.name)}</strong><span class="tree-count">${count}</span>
+      ${icon('chevron')}<strong><span class="tree-code">${escapeHtml(node.code)}</span>${escapeHtml(node.name)}</strong><span class="tree-count">${count}</span>
     </button>
     <div class="tree-children" ${open ? '' : 'hidden'}>
       ${children.join('')}
@@ -111,11 +124,11 @@ function treeNodeMarkup(node, depth, ctx) {
 function sidebarMarkup() {
   const tree = buildTree(state.problems);
   const visibleIds = new Set(filterProblems(state.problems, { query: state.query }).map((p) => p.id));
-  const ctx = { visibleIds, ancestors: activeAncestors(), active: activeProblem(), index: { depth: {} } };
+  const ctx = { visibleIds, ancestors: activeAncestors(), active: activeProblem() };
   return `<div class="sidebar-head"><span>COURSE_INDEX</span><button class="sidebar-close" type="button" aria-label="Close navigation">×</button></div>
     <nav class="course-tree" aria-label="Course tree">
       ${tree.map((node) => treeNodeMarkup(node, 0, ctx)).join('')}
-      ${state.query && !visibleIds.size ? '<p style="padding:14px;color:var(--faint);font:10px var(--mono)">$ grep: no matches<span class="sr-only">No problems match the search.</span></p>' : ''}
+      ${state.query && !visibleIds.size ? '<p class="tree-empty">$ grep: no matches<span class="sr-only">No problems match the search.</span></p>' : ''}
     </nav>
     <div class="sidebar-foot"><span><i class="status-led"></i>SYSTEM ONLINE</span><span>v1.0.0</span></div>`;
 }
@@ -124,7 +137,6 @@ function renderSidebar() {
   const sidebar = document.querySelector('#sidebar');
   if (!sidebar) return;
   sidebar.innerHTML = sidebarMarkup();
-  sidebar.classList.toggle('is-open', state.sidebarOpen);
   sidebar.querySelectorAll('[data-toggle]').forEach((button) => button.addEventListener('click', () => {
     const path = button.dataset.toggle;
     if (groupIsOpen(path, activeAncestors())) { state.closedGroups.add(path); state.openGroups.delete(path); }
@@ -133,13 +145,31 @@ function renderSidebar() {
   }));
   sidebar.querySelectorAll('.tree-problem').forEach((link) => link.addEventListener('click', () => closeSidebar()));
   const close = sidebar.querySelector('.sidebar-close');
-  if (close) close.addEventListener('click', closeSidebar);
+  if (close) close.addEventListener('click', () => closeSidebar(true));
 }
 
-function closeSidebar() {
+function isMobile() { return window.matchMedia('(max-width: 900px)').matches; }
+
+function setSidebar(open) {
+  state.sidebarOpen = open;
+  const sidebar = document.querySelector('#sidebar');
+  const menuButton = document.querySelector('#menu-button');
+  sidebar?.classList.toggle('is-open', open);
+  if (menuButton) {
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  }
+}
+
+function openSidebar({ focus = false } = {}) {
+  setSidebar(true);
+  if (focus) document.querySelector('.sidebar-close')?.focus();
+}
+
+function closeSidebar(returnFocus = false) {
   if (!state.sidebarOpen) return;
-  state.sidebarOpen = false;
-  document.querySelector('#sidebar')?.classList.remove('is-open');
+  setSidebar(false);
+  if (returnFocus) document.querySelector('#menu-button')?.focus();
 }
 
 /* ---------- Overview ---------- */
@@ -188,10 +218,6 @@ function overviewMarkup() {
 
 /* ---------- Problem view ---------- */
 
-function resourceDot(available, label) {
-  return `<span class="resource-dot ${available ? 'ready' : ''}" title="${escapeHtml(label)} ${available ? 'available' : 'missing'}"><span></span>${escapeHtml(label)}</span>`;
-}
-
 function emptyResource(kind, title, message) {
   return `<div class="empty-resource"><div class="empty-icon">${icon(kind)}</div><code>STATUS: NOT_FOUND</code><h3>${escapeHtml(title)}</h3><p>${escapeHtml(message)}</p></div>`;
 }
@@ -205,37 +231,37 @@ function problemMarkup(p) {
   const index = ordered.findIndex((item) => item.id === p.id);
   const previous = index > 0 ? ordered[index - 1] : null;
   const next = index >= 0 && index < ordered.length - 1 ? ordered[index + 1] : null;
-  const crumbs = p.groupPath.map((segment, i) => {
-    const path = p.groupPath.slice(0, i + 1).join('/');
-    return `<button type="button" data-open-group="${escapeHtml(path)}">${escapeHtml(segment)}</button><span>/</span>`;
-  }).join('');
   return `<div class="problem-view view-enter">
-    <div class="terminal-label"><span>~/${escapeHtml(p.groupPath.join('/'))}</span><span>${escapeHtml(p.id.split('/').pop())}</span></div>
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="#/">ROOT</a><span>/</span>${crumbs}<strong>${escapeHtml(p.title)}</strong></nav>
-    <header class="problem-head">
-      <div><code>${escapeHtml(p.id)}</code><h1>${escapeHtml(p.title)}</h1></div>
-      <div class="artifact-status">${resourceDot(!!p.pdf, 'PDF')}${resourceDot(!!p.dig, 'DIG')}${resourceDot(p.hasNote, 'NOTE')}</div>
-    </header>
-    <div class="tab-bar" role="tablist" aria-label="Problem resources">
-      <button role="tab" aria-selected="true" data-tab="statement">${icon('file')}<span>STATEMENT</span><small>${p.pdf ? 'READY' : 'MISSING'}</small></button>
-      <button role="tab" aria-selected="false" data-tab="solution">${icon('circuit')}<span>SOLUTION</span><small>${p.dig ? 'READY' : 'MISSING'}</small></button>
-      <button role="tab" aria-selected="false" data-tab="note">${icon('note')}<span>NOTE</span><small>${p.hasNote ? 'READY' : 'MISSING'}</small></button>
+    <h1 class="problem-title">${escapeHtml(p.title)}</h1>
+    <div class="problem-meta">
+      <code>${escapeHtml(p.id)}</code>
+      <span class="meta-dot ${p.pdf ? 'ready' : ''}" title="PDF statement ${p.pdf ? 'available' : 'missing'}">PDF</span>
+      <span class="meta-dot ${p.dig ? 'ready' : ''}" title=".dig solution ${p.dig ? 'available' : 'missing'}">DIG</span>
+      <span class="meta-dot ${p.hasNote ? 'ready' : ''}" title="Scratch note ${p.hasNote ? 'available' : 'missing'}">NOTE</span>
     </div>
-    <section class="tab-panel" id="panel-statement" role="tabpanel">
-      ${p.pdf ? `<div class="resource-toolbar"><span class="file-chip">${icon('file')}<code>${escapeHtml(basename(p.pdf))}</code></span><div class="actions">${toolbarLink(asset(p.pdf), 'OPEN')}${toolbarLink(asset(p.pdf), 'DOWNLOAD', { download: true })}</div></div><object class="pdf-viewer" data="${asset(p.pdf)}" type="application/pdf">${emptyResource('file', 'PDF preview unavailable', 'Open the statement in a new browser tab.')}</object>` : emptyResource('file', 'Statement unavailable', 'No PDF is associated with this problem yet.')}
-    </section>
-    <section class="tab-panel" id="panel-solution" role="tabpanel" hidden>
-      ${p.dig ? `<div class="resource-toolbar"><span class="file-chip">${icon('circuit')}<code>${escapeHtml(basename(p.dig))}</code></span><div class="actions">
-          <div class="zoom-group"><button type="button" data-zoom="in" title="Zoom in">+</button><button type="button" data-zoom="out" title="Zoom out">−</button><button type="button" data-zoom="fit" title="Fit to view">FIT</button><button type="button" data-zoom="reset" title="Reset zoom">1:1</button></div>
-          ${p.svg ? toolbarLink(asset(p.dig), 'DOWNLOAD .DIG', { primary: true, download: true }) : ''}
-          ${p.svg ? toolbarLink(asset(p.svg), 'SVG', { download: true }) : ''}
-        </div></div>
-        <div id="solution-viewer">${p.svg ? '<div class="inline-loader"><span></span>RENDERING CIRCUIT...</div>' : emptyResource('zap', 'Circuit not rendered', 'Run npm run render to generate the SVG for this circuit.')}</div>`
-      : emptyResource('circuit', 'Solution unavailable', 'No .dig circuit is associated with this problem yet.')}
-    </section>
-    <section class="tab-panel" id="panel-note" role="tabpanel" hidden>
-      ${p.note ? `<div class="resource-toolbar"><span class="file-chip">${icon('note')}<code>${escapeHtml(basename(p.ods || p.csv))}</code></span><div class="actions">${toolbarLink(asset(p.note), 'OPEN')}${(p.ods || p.csv) ? toolbarLink(asset(p.ods || p.csv), 'DOWNLOAD', { download: true }) : ''}</div></div><div class="note-frame"><iframe src="${asset(p.note)}" title="Scratch note for ${escapeHtml(p.title)}"></iframe></div>` : emptyResource('note', 'No scratch note', 'This problem has no .ods or .csv scratch paper yet.')}
-    </section>
+    <div class="tab-bar" role="tablist" aria-label="Problem resources">
+      ${TABS.map((tab) => {
+        const available = isTabAvailable(tab.id, p);
+        return `<button role="tab" id="tab-${tab.id}" aria-controls="panel-${tab.id}" aria-selected="${tab.id === 'statement'}" tabindex="${tab.id === 'statement' ? 0 : -1}" data-tab="${tab.id}">${icon(tab.kind)}<span>${tab.label}</span><small>${available ? 'READY' : 'MISSING'}</small></button>`;
+      }).join('')}
+    </div>
+    <div class="problem-body">
+      <section class="tab-panel" id="panel-statement" role="tabpanel" aria-labelledby="tab-statement" tabindex="0">
+        ${p.pdf ? `<div class="resource-toolbar"><span class="file-chip">${icon('file')}<code>${escapeHtml(basename(p.pdf))}</code></span><div class="actions">${toolbarLink(asset(p.pdf), 'OPEN')}${toolbarLink(asset(p.pdf), 'DOWNLOAD', { download: true })}</div></div><object class="pdf-viewer" data="${asset(p.pdf)}" type="application/pdf">${emptyResource('file', 'PDF preview unavailable', 'Open the statement in a new browser tab.')}</object>` : emptyResource('file', 'Statement unavailable', 'No PDF is associated with this problem yet.')}
+      </section>
+      <section class="tab-panel" id="panel-solution" role="tabpanel" aria-labelledby="tab-solution" tabindex="0" hidden>
+        ${p.dig ? `<div class="resource-toolbar"><span class="file-chip">${icon('circuit')}<code>${escapeHtml(basename(p.dig))}</code></span><div class="actions">
+            <div class="zoom-group"><button type="button" data-zoom="in" title="Zoom in">+</button><button type="button" data-zoom="out" title="Zoom out">−</button><button type="button" data-zoom="fit" title="Fit to view">FIT</button><button type="button" data-zoom="reset" title="Reset zoom">1:1</button></div>
+            ${p.svg ? toolbarLink(asset(p.dig), 'DOWNLOAD .DIG', { primary: true, download: true }) : ''}
+            ${p.svg ? toolbarLink(asset(p.svg), 'SVG', { download: true }) : ''}
+          </div></div>
+          <div id="solution-viewer">${p.svg ? '<div class="inline-loader"><span></span>RENDERING CIRCUIT...</div>' : emptyResource('zap', 'Circuit not rendered', 'Run npm run render to generate the SVG for this circuit.')}</div>`
+        : emptyResource('circuit', 'Solution unavailable', 'No .dig circuit is associated with this problem yet.')}
+      </section>
+      <section class="tab-panel" id="panel-note" role="tabpanel" aria-labelledby="tab-note" tabindex="0" hidden>
+        ${p.note ? `<div class="resource-toolbar"><span class="file-chip">${icon('note')}<code>${escapeHtml(basename(p.ods || p.csv))}</code></span><div class="actions">${toolbarLink(asset(p.note), 'OPEN')}${(p.ods || p.csv) ? toolbarLink(asset(p.ods || p.csv), 'DOWNLOAD', { download: true }) : ''}</div></div><div class="note-frame"><iframe src="${asset(p.note)}" title="Scratch note for ${escapeHtml(p.title)}"></iframe></div>` : emptyResource('note', 'No scratch note', 'This problem has no .ods or .csv scratch paper yet.')}
+      </section>
+    </div>
     <nav class="problem-pagination" aria-label="Adjacent problems">
       ${previous ? `<a href="#/problem/${encodeURIComponent(previous.id)}"><small>← PREVIOUS</small><strong>${escapeHtml(previous.title)}</strong><span>${escapeHtml(previous.groupPath.join(' / '))}</span></a>` : '<span></span>'}
       ${next ? `<a class="next" href="#/problem/${encodeURIComponent(next.id)}"><small>NEXT →</small><strong>${escapeHtml(next.title)}</strong><span>${escapeHtml(next.groupPath.join(' / '))}</span></a>` : '<span></span>'}
@@ -261,12 +287,33 @@ async function loadSolution(p) {
   }
 }
 
+function selectTab(main, tabButton, { focus = false } = {}) {
+  const selectedId = tabButton.dataset.tab;
+  main.querySelectorAll('[role="tab"]').forEach((item) => {
+    const selected = item === tabButton;
+    item.setAttribute('aria-selected', String(selected));
+    item.setAttribute('tabindex', selected ? '0' : '-1');
+  });
+  main.querySelectorAll('.tab-panel').forEach((panel) => { panel.hidden = panel.id !== `panel-${selectedId}`; });
+  if (focus) tabButton.focus();
+}
+
 function bindProblemPage(p) {
   const main = document.querySelector('#main');
-  main.querySelectorAll('[data-tab]').forEach((tab) => tab.addEventListener('click', () => {
-    main.querySelectorAll('[data-tab]').forEach((item) => item.setAttribute('aria-selected', String(item === tab)));
-    main.querySelectorAll('.tab-panel').forEach((panel) => { panel.hidden = panel.id !== `panel-${tab.dataset.tab}`; });
-  }));
+  const tabs = [...main.querySelectorAll('[role="tab"]')];
+
+  const activate = (tab, options) => selectTab(main, tab, options);
+  tabs.forEach((tab) => tab.addEventListener('click', () => activate(tab)));
+  main.querySelector('.tab-bar').addEventListener('keydown', (event) => {
+    const currentIndex = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+    let target = null;
+    if (event.key === 'ArrowRight') target = tabs[(currentIndex + 1) % tabs.length];
+    else if (event.key === 'ArrowLeft') target = tabs[(currentIndex - 1 + tabs.length) % tabs.length];
+    else if (event.key === 'Home') target = tabs[0];
+    else if (event.key === 'End') target = tabs[tabs.length - 1];
+    if (target) { event.preventDefault(); activate(target, { focus: true }); }
+  });
+
   main.querySelectorAll('[data-zoom]').forEach((button) => button.addEventListener('click', () => {
     if (!state.viewer) return;
     const action = button.dataset.zoom;
@@ -274,12 +321,6 @@ function bindProblemPage(p) {
     else if (action === 'out') state.viewer.zoomOut();
     else if (action === 'fit') state.viewer.fit();
     else state.viewer.reset();
-  }));
-  main.querySelectorAll('[data-open-group]').forEach((button) => button.addEventListener('click', () => {
-    state.openGroups.add(button.dataset.openGroup);
-    state.closedGroups.delete(button.dataset.openGroup);
-    location.hash = '#/';
-    renderSidebar();
   }));
   main.querySelectorAll('[data-goto]').forEach((button) => button.addEventListener('click', () => {
     location.hash = `#/problem/${button.dataset.goto}`;
@@ -296,9 +337,11 @@ function route() {
   const problem = problemId ? state.problems.find((p) => p.id === problemId) : null;
   const main = document.querySelector('#main');
   if (page === 'problem' && problem) {
+    document.title = `${problem.title} — 2110252 Digital Logic Atlas`;
     main.innerHTML = problemMarkup(problem);
     bindProblemPage(problem);
   } else {
+    document.title = '2110252 Digital Logic Atlas';
     if (page === 'problem') location.hash = '#/';
     main.innerHTML = overviewMarkup();
     main.querySelectorAll('[data-goto]').forEach((button) => button.addEventListener('click', () => {
@@ -310,51 +353,60 @@ function route() {
   main.scrollTop = 0;
 }
 
-/* ---------- Boot ---------- */
+/* ---------- Shell events ---------- */
 
 function bindShell() {
-  document.querySelector('.menu-button').addEventListener('click', () => {
-    state.sidebarOpen = !state.sidebarOpen;
-    document.querySelector('#sidebar')?.classList.toggle('is-open', state.sidebarOpen);
+  document.querySelector('#menu-button').addEventListener('click', () => {
+    if (state.sidebarOpen) closeSidebar(true);
+    else openSidebar();
   });
-  document.querySelector('.sidebar-scrim').addEventListener('click', closeSidebar);
+  document.querySelector('.sidebar-scrim').addEventListener('click', () => closeSidebar());
   document.querySelector('.theme-button').addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     try { localStorage.setItem('digital-logic-theme', next); } catch (_) { /* private mode */ }
     document.querySelector('.theme-button').innerHTML = next === 'dark' ? icon('sun') : icon('moon');
   });
+
   const search = document.querySelector('#global-search');
   search.addEventListener('input', () => {
     state.query = search.value.trim();
     renderSidebar();
+    // On mobile the tree lives in the drawer — surface results immediately.
+    if (state.query && isMobile() && !state.sidebarOpen) openSidebar();
   });
+
   document.addEventListener('keydown', (event) => {
-    const typing = ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '');
-    if (event.key === '/' && !typing) { event.preventDefault(); search.focus(); }
-    else if (event.key === 'Escape' && document.activeElement === search) { search.value = ''; state.query = ''; renderSidebar(); search.blur(); }
+    const searchFocused = document.activeElement === search;
+    if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName || '')) {
+      event.preventDefault();
+      search.focus();
+    } else if (event.key === 'Escape') {
+      if (searchFocused) { search.value = ''; state.query = ''; renderSidebar(); search.blur(); }
+      else if (state.sidebarOpen) closeSidebar(true);
+    }
   });
   window.addEventListener('hashchange', route);
 }
+
+/* ---------- Boot ---------- */
 
 async function boot() {
   let response = null;
   try { response = await fetch(new URL('data/site.json', document.baseURI)); } catch (_) { /* network error */ }
   if (!response || !response.ok) {
-    app.innerHTML = fatalMarkup('data/site.json not found', 'The content manifest is missing. Run "npm run render && npm run build" to generate it, then reload.');
-    document.querySelector('#fatal-retry').addEventListener('click', () => location.reload());
+    showFatal('data/site.json not found', 'The content manifest is missing. Run "npm run render && npm run build" to generate it, then reload.');
     return;
   }
   try { state.problems = await response.json(); } catch (_) {
-    app.innerHTML = fatalMarkup('data/site.json is invalid', 'The manifest could not be parsed. Rebuild the site with "npm run build".');
-    document.querySelector('#fatal-retry').addEventListener('click', () => location.reload());
+    showFatal('data/site.json is invalid', 'The manifest could not be parsed. Rebuild the site with "npm run build".');
     return;
   }
   if (!Array.isArray(state.problems) || !state.problems.length) {
-    app.innerHTML = fatalMarkup('empty manifest', 'No problems were indexed. Add folders with .dig or .pdf files, then run "npm run index && npm run build".');
-    document.querySelector('#fatal-retry').addEventListener('click', () => location.reload());
+    showFatal('empty manifest', 'No problems were indexed. Add folders with .dig or .pdf files, then run "npm run index && npm run build".');
     return;
   }
+  clearBootState();
   app.innerHTML = shellMarkup();
   bindShell();
   route();

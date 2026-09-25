@@ -67,6 +67,15 @@ body {
   overflow: hidden;
 }
 
+/* #app must be a plain full-size block: loading/fatal screens render as its
+   children, never as classes on the root, so the booted shell always fills
+   the viewport. dvh handles mobile browser chrome; the vh line is the fallback. */
+#app {
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -146,6 +155,8 @@ svg {
 
 .app-shell {
   height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .fatal-error h1 {
@@ -326,9 +337,9 @@ kbd {
 /* ---------- Workspace ---------- */
 
 .workspace {
-  height: calc(100% - var(--topbar));
+  min-height: 0;
   display: grid;
-  grid-template-columns: var(--sidebar) 1fr;
+  grid-template-columns: var(--sidebar) minmax(0, 1fr);
 }
 
 /* ---------- Sidebar ---------- */
@@ -563,11 +574,87 @@ kbd {
   background-size: auto, 40px 40px, 40px 40px, auto;
 }
 
-.overview,
-.problem-view {
+.overview {
   max-width: 1180px;
   margin: 0 auto;
   padding: 34px clamp(28px, 4vw, 62px) 60px;
+}
+
+/* Problem view: full-height flex column — tab bar + body fill remaining
+   viewport space so PDF/SVG/note viewers never overflow into double scroll.
+   min-height (not height) lets #main scroll when short screens force the
+   viewer minimum heights taller than the available space. */
+.problem-view {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 14px clamp(16px, 3vw, 34px) 14px;
+}
+
+.problem-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.problem-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 32px;
+  padding: 0 2px 10px;
+  color: var(--muted);
+  font: 10px var(--mono);
+  letter-spacing: 0.06em;
+}
+
+.problem-meta code {
+  color: var(--cyan);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta-dot {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border: 1px solid var(--line-2);
+  color: var(--faint);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+
+.meta-dot::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid var(--faint);
+}
+
+.meta-dot.ready {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--green) 50%, var(--line));
+  background: var(--green-soft);
+}
+
+.meta-dot.ready::before {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.problem-body {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .terminal-label {
@@ -804,101 +891,13 @@ kbd {
 
 /* ---------- Problem view ---------- */
 
-.breadcrumbs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin: 18px 0 0;
-  color: var(--muted);
-  font: 10px var(--mono);
-  letter-spacing: 0.08em;
-}
-
-.breadcrumbs a,
-.breadcrumbs button {
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  padding: 0;
-  font: inherit;
-  letter-spacing: inherit;
-}
-
-.breadcrumbs a:hover,
-.breadcrumbs button:hover {
-  color: var(--cyan);
-}
-
-.breadcrumbs span {
+/* Empty-search hint inside the sidebar tree */
+.tree-empty {
+  margin: 0;
+  padding: 14px;
   color: var(--faint);
-}
-
-.breadcrumbs strong {
-  color: var(--cyan);
-  font-weight: 600;
-}
-
-.problem-head {
-  margin: 18px 0 22px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.problem-head > div:first-child {
-  min-width: 0;
-}
-
-.problem-head code {
-  color: var(--cyan);
   font: 10px var(--mono);
-  letter-spacing: 0.08em;
-}
-
-.problem-head h1 {
-  margin: 6px 0 0;
-  font: 700 clamp(28px, 4vw, 44px) / 1.05 var(--mono);
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
-}
-
-.artifact-status {
-  display: flex;
-  gap: 10px;
-  flex-shrink: 0;
-}
-
-.resource-dot {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 10px;
-  border: 1px solid var(--line-2);
-  color: var(--muted);
-  font: 8px var(--mono);
-  letter-spacing: 0.1em;
-}
-
-.resource-dot > span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  border: 1px solid var(--faint);
-}
-
-.resource-dot.ready {
-  color: var(--text);
-  border-color: color-mix(in srgb, var(--green) 50%, var(--line));
-  background: var(--green-soft);
-}
-
-.resource-dot.ready > span {
-  background: var(--green);
-  border-color: var(--green);
-  box-shadow: 0 0 6px color-mix(in srgb, var(--green) 70%, transparent);
+  letter-spacing: 0.06em;
 }
 
 /* Tab bar */
@@ -910,6 +909,7 @@ kbd {
   border: 1px solid var(--line);
   border-bottom: 0;
   background: var(--panel);
+  flex-shrink: 0;
 }
 
 .tab-bar button {
@@ -966,6 +966,14 @@ kbd {
   border: 1px solid var(--line);
   background: var(--panel);
   overflow: hidden;
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-panel[hidden] {
+  display: none;
 }
 
 /* Resource toolbars (file actions) */
@@ -978,6 +986,7 @@ kbd {
   padding: 8px 14px;
   border-bottom: 1px solid var(--line);
   background: var(--panel-2);
+  flex-shrink: 0;
 }
 
 .resource-toolbar > .file-chip {
@@ -1035,13 +1044,15 @@ kbd {
   width: 11px;
 }
 
-.resource-toolbar button.primary {
+/* Anchors and buttons share the primary treatment (DOWNLOAD .DIG is an <a>). */
+.resource-toolbar .primary {
   border-color: var(--cyan);
   background: var(--cyan-soft);
   color: var(--cyan);
 }
 
-.resource-toolbar button.primary:hover {
+.resource-toolbar .primary:hover,
+.resource-toolbar .primary:focus-visible {
   background: color-mix(in srgb, var(--cyan) 18%, transparent);
 }
 
@@ -1064,24 +1075,33 @@ kbd {
   border-right: 0;
 }
 
-/* PDF viewer */
+/* PDF viewer — flex:1 fills the tab panel's remaining space */
 
 .pdf-viewer {
   display: block;
   width: 100%;
-  height: min(74vh, 900px);
+  flex: 1;
+  min-height: 0;
   border: 0;
   background: #202124;
 }
 
-/* SVG viewer */
+/* SVG viewer — #solution-viewer passes flex height into .svg-frame */
+
+#solution-viewer {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
 
 .svg-frame {
   position: relative;
   display: grid;
   place-items: center;
   width: 100%;
-  height: min(74vh, 900px);
+  flex: 1;
+  min-height: 0;
   background:
     repeating-linear-gradient(45deg, transparent 0 12px, color-mix(in srgb, var(--line) 30%, transparent) 12px 13px),
     var(--panel-3);
@@ -1174,8 +1194,11 @@ kbd {
 
 .note-frame {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: min(74vh, 900px);
+  flex: 1;
+  min-height: 0;
   background: var(--panel-2);
   border-top: 1px solid var(--line);
 }
@@ -1191,7 +1214,8 @@ kbd {
 /* Empty states */
 
 .empty-resource {
-  min-height: 360px;
+  flex: 1;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1238,7 +1262,8 @@ kbd {
 /* Inline loader (when SVG is fetching) */
 
 .inline-loader {
-  min-height: 300px;
+  flex: 1;
+  min-height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1257,19 +1282,22 @@ kbd {
   animation: pulse 1s infinite;
 }
 
-/* Pagination */
+/* Pagination — compact single-line strip below the viewer */
 
 .problem-pagination {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 10px;
+  flex-shrink: 0;
 }
 
 .problem-pagination a {
   display: grid;
-  gap: 4px;
-  padding: 15px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 8px;
+  padding: 9px 13px;
   border: 1px solid var(--line);
   background: var(--panel);
   text-decoration: none;
@@ -1295,6 +1323,9 @@ kbd {
 .problem-pagination strong {
   color: var(--text);
   font: 600 12px var(--mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .problem-pagination span {
@@ -1302,7 +1333,7 @@ kbd {
   text-overflow: ellipsis;
   white-space: nowrap;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .problem-pagination > span {
@@ -1357,6 +1388,15 @@ kbd {
 }
 
 @media (max-width: 900px) {
+  /* Menu button appears — widen to five columns so every control keeps its
+     row: menu, brand, search, summary, theme. */
+  .topbar {
+    grid-template-columns: 48px auto minmax(170px, 1fr) auto 48px;
+  }
+  .menu-button {
+    display: block;
+    width: 48px;
+  }
   .sidebar {
     position: fixed;
     z-index: 50;
@@ -1373,10 +1413,6 @@ kbd {
   }
   .sidebar-close {
     display: block;
-  }
-  .menu-button {
-    display: block;
-    width: 58px;
   }
   .workspace {
     grid-template-columns: 1fr;
@@ -1395,15 +1431,32 @@ kbd {
 }
 
 @media (max-width: 760px) {
-  :root {
-    --topbar: 58px;
-  }
+  /* Topbar becomes two real grid rows: actions + search. The search is part
+     of the layout, so it can never overlay workspace content. */
   .topbar {
-    grid-template-columns: 58px 1fr 58px;
+    grid-template-columns: 58px minmax(0, 1fr) 58px;
+    grid-template-areas:
+      'menu brand theme'
+      'search search search';
+    height: auto;
+    min-height: 0;
+  }
+  .menu-button {
+    grid-area: menu;
   }
   .wordmark {
+    grid-area: brand;
     border: 0;
     padding: 0 12px;
+  }
+  .global-search {
+    grid-area: search;
+    height: 40px;
+    margin: 0 10px 10px;
+  }
+  .theme-button {
+    grid-area: theme;
+    width: 58px;
   }
   .prompt-mark {
     width: 31px;
@@ -1412,26 +1465,18 @@ kbd {
   .wordmark small {
     font-size: 9px;
   }
-  .global-search {
-    position: fixed;
-    z-index: 22;
-    top: var(--topbar);
-    left: 0;
-    right: 0;
-    height: 44px;
-    margin: 0;
-    border-left: 0;
-    border-right: 0;
-  }
   .system-summary {
     display: none;
   }
-  .theme-button {
-    width: 58px;
-  }
-  .overview,
-  .problem-view {
+  .overview {
     padding: 22px 16px 45px;
+  }
+  .problem-view {
+    padding: 10px 12px;
+  }
+  .problem-meta {
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .terminal-label {
     margin-top: 4px;
@@ -1451,16 +1496,6 @@ kbd {
   .metric-grid strong {
     font-size: 32px;
   }
-  .problem-head {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-  .problem-head h1 {
-    font-size: 32px;
-  }
-  .artifact-status {
-    justify-content: flex-start;
-  }
   .tab-bar {
     overflow-x: auto;
   }
@@ -1479,10 +1514,12 @@ kbd {
   .resource-toolbar > .file-chip code {
     max-width: 100%;
   }
+  /* Viewers are flex-sized from the shell; just keep them usable when the
+     viewport is short, letting #main scroll if everything cannot fit. */
   .pdf-viewer,
   .svg-frame,
   .note-frame {
-    height: 65vh;
+    min-height: 320px;
   }
   .problem-pagination {
     grid-template-columns: 1fr;
@@ -1514,9 +1551,6 @@ kbd {
   }
   .overview h1 {
     font-size: 45px;
-  }
-  .problem-head h1 {
-    font-size: 28px;
   }
   .tab-bar button {
     grid-template-columns: 16px auto;

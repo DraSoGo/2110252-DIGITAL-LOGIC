@@ -16,7 +16,18 @@ export function buildTree(problems) {
     }
     node.problems.push(problem);
   }
-  return sortTree(root).children;
+  sortTree(root);
+  numberSiblings(root.children);
+  return root.children;
+}
+
+// Local ordering per parent: every sibling collection restarts at 1,
+// so Lab_01 under Simulation is 01 even after Exam1's children 66/67/68.
+function numberSiblings(nodes, offset = 0) {
+  nodes.forEach((node, index) => {
+    node.code = String(offset + index + 1).padStart(2, '0');
+    numberSiblings(node.children);
+  });
 }
 
 function sortTree(node) {
@@ -25,7 +36,6 @@ function sortTree(node) {
   for (const child of node.children) sortTree(child);
   return node;
 }
-
 export function countTree(node) {
   let count = node.problems?.length || 0;
   if (node.children) for (const child of node.children) count += countTree(child);

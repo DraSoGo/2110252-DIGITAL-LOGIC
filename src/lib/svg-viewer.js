@@ -177,6 +177,8 @@ export function createSvgViewer(container) {
 
   function onKeydown(event) {
     if (!svgEl) return;
+    // Only respond when the viewer is actually visible (its tab is open).
+    if (viewport.clientWidth === 0 || viewport.clientHeight === 0) return;
     if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
     if (event.key === '+' || event.key === '=') {
       event.preventDefault();
