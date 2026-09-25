@@ -1,5 +1,6 @@
 dist/
 generated/
+data/site.json
 tools/
 node_modules/
 .DS_Store
