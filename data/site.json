@@ -1,0 +1,420 @@
+[
+  {
+    "id": "Exam1/66/01",
+    "title": "01",
+    "groupPath": [
+      "Exam1",
+      "66"
+    ],
+    "pdf": "Exam1/66/01/DigLo66_Quiz1__01.pdf",
+    "dig": "Exam1/66/01/DigLo66_Quiz1__01.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Exam1__66__01.svg",
+    "note": null
+  },
+  {
+    "id": "Exam1/66/02",
+    "title": "02",
+    "groupPath": [
+      "Exam1",
+      "66"
+    ],
+    "pdf": "Exam1/66/02/DigLo66_Quiz1__02.pdf",
+    "dig": "Exam1/66/02/DigLo66_Quiz1__02.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Exam1__66__02.svg",
+    "note": null
+  },
+  {
+    "id": "Exam1/67/01",
+    "title": "01",
+    "groupPath": [
+      "Exam1",
+      "67"
+    ],
+    "pdf": "Exam1/67/01/DigLo67_Exam1__01.pdf",
+    "dig": "Exam1/67/01/DigLo67_Exam1__01.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Exam1__67__01.svg",
+    "note": null
+  },
+  {
+    "id": "Exam1/67/02",
+    "title": "02",
+    "groupPath": [
+      "Exam1",
+      "67"
+    ],
+    "pdf": "Exam1/67/02/DigLo67_Exam1__02.pdf",
+    "dig": "Exam1/67/02/DigLo67_Exam1__02.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Exam1__67__02.svg",
+    "note": null
+  },
+  {
+    "id": "Exam1/68/01",
+    "title": "01",
+    "groupPath": [
+      "Exam1",
+      "68"
+    ],
+    "pdf": "Exam1/68/01/DigLo68_Exam1__1.pdf",
+    "dig": "Exam1/68/01/DigLo68_Exam1__1.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Exam1__68__01.svg",
+    "note": null
+  },
+  {
+    "id": "Exam1/68/02",
+    "title": "02",
+    "groupPath": [
+      "Exam1",
+      "68"
+    ],
+    "pdf": "Exam1/68/02/DigLo68_Exam1__2.pdf",
+    "dig": "Exam1/68/02/DigLo68_Exam1__2.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Exam1__68__02.svg",
+    "note": null
+  },
+  {
+    "id": "Exam1/68/03",
+    "title": "03",
+    "groupPath": [
+      "Exam1",
+      "68"
+    ],
+    "pdf": "Exam1/68/03/DigLo68_Exam1__3.pdf",
+    "dig": "Exam1/68/03/DigLo68_Exam1__3.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Exam1__68__03.svg",
+    "note": null
+  },
+  {
+    "id": "Learn/Full_Address_1",
+    "title": "Full Address 1",
+    "groupPath": [
+      "Learn"
+    ],
+    "pdf": null,
+    "dig": "Learn/Full_Address_1/fulladdress.dig",
+    "ods": "Learn/Full_Address_1/full_address.ods",
+    "csv": null,
+    "hasNote": true,
+    "svg": "generated/svg/Learn__Full_Address_1.svg",
+    "note": "generated/note/Learn__Full_Address_1.html"
+  },
+  {
+    "id": "Learn/Full_Address_2",
+    "title": "Full Address 2",
+    "groupPath": [
+      "Learn"
+    ],
+    "pdf": null,
+    "dig": "Learn/Full_Address_2/fulladdress2.dig",
+    "ods": null,
+    "csv": "Learn/Full_Address_2/fulladdress2.csv",
+    "hasNote": true,
+    "svg": "generated/svg/Learn__Full_Address_2.svg",
+    "note": "generated/note/Learn__Full_Address_2.html"
+  },
+  {
+    "id": "Simulation/Lab_01/01",
+    "title": "01",
+    "groupPath": [
+      "Simulation",
+      "Lab_01"
+    ],
+    "pdf": "Simulation/Lab_01/01/01.pdf",
+    "dig": "Simulation/Lab_01/01/01_Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_01__01.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_01/02",
+    "title": "02",
+    "groupPath": [
+      "Simulation",
+      "Lab_01"
+    ],
+    "pdf": "Simulation/Lab_01/02/02.pdf",
+    "dig": "Simulation/Lab_01/02/02_Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_01__02.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_01/03",
+    "title": "03",
+    "groupPath": [
+      "Simulation",
+      "Lab_01"
+    ],
+    "pdf": "Simulation/Lab_01/03/03.pdf",
+    "dig": "Simulation/Lab_01/03/03_Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_01__03.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_01/04",
+    "title": "04",
+    "groupPath": [
+      "Simulation",
+      "Lab_01"
+    ],
+    "pdf": "Simulation/Lab_01/04/04.pdf",
+    "dig": "Simulation/Lab_01/04/04_Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_01__04.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/01",
+    "title": "01",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/01/01.pdf",
+    "dig": "Simulation/Lab_02/01/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__01.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/02",
+    "title": "02",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/02/02.pdf",
+    "dig": "Simulation/Lab_02/02/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__02.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/03",
+    "title": "03",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/03/03.pdf",
+    "dig": "Simulation/Lab_02/03/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__03.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/04",
+    "title": "04",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/04/04.pdf",
+    "dig": "Simulation/Lab_02/04/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__04.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/05",
+    "title": "05",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/05/05.pdf",
+    "dig": "Simulation/Lab_02/05/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__05.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/06",
+    "title": "06",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/06/06.pdf",
+    "dig": "Simulation/Lab_02/06/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__06.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/07",
+    "title": "07",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/07/07.pdf",
+    "dig": "Simulation/Lab_02/07/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__07.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/08",
+    "title": "08",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/08/08.pdf",
+    "dig": "Simulation/Lab_02/08/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__08.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_02/09",
+    "title": "09",
+    "groupPath": [
+      "Simulation",
+      "Lab_02"
+    ],
+    "pdf": "Simulation/Lab_02/09/09.pdf",
+    "dig": "Simulation/Lab_02/09/Template.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false,
+    "svg": "generated/svg/Simulation__Lab_02__09.svg",
+    "note": null
+  },
+  {
+    "id": "Simulation/Lab_03/01",
+    "title": "01",
+    "groupPath": [
+      "Simulation",
+      "Lab_03"
+    ],
+    "pdf": "Simulation/Lab_03/01/01.pdf",
+    "dig": "Simulation/Lab_03/01/Template-01.dig",
+    "ods": "Simulation/Lab_03/01/01.ods",
+    "csv": null,
+    "hasNote": true,
+    "svg": "generated/svg/Simulation__Lab_03__01.svg",
+    "note": "generated/note/Simulation__Lab_03__01.html"
+  },
+  {
+    "id": "Simulation/Lab_03/02",
+    "title": "02",
+    "groupPath": [
+      "Simulation",
+      "Lab_03"
+    ],
+    "pdf": "Simulation/Lab_03/02/02.pdf",
+    "dig": "Simulation/Lab_03/02/Template-02.dig",
+    "ods": "Simulation/Lab_03/02/02.ods",
+    "csv": null,
+    "hasNote": true,
+    "svg": "generated/svg/Simulation__Lab_03__02.svg",
+    "note": "generated/note/Simulation__Lab_03__02.html"
+  },
+  {
+    "id": "Simulation/Lab_03/03",
+    "title": "03",
+    "groupPath": [
+      "Simulation",
+      "Lab_03"
+    ],
+    "pdf": "Simulation/Lab_03/03/03.pdf",
+    "dig": "Simulation/Lab_03/03/Template-03.dig",
+    "ods": "Simulation/Lab_03/03/03.ods",
+    "csv": null,
+    "hasNote": true,
+    "svg": "generated/svg/Simulation__Lab_03__03.svg",
+    "note": "generated/note/Simulation__Lab_03__03.html"
+  },
+  {
+    "id": "Simulation/Lab_03/04",
+    "title": "04",
+    "groupPath": [
+      "Simulation",
+      "Lab_03"
+    ],
+    "pdf": "Simulation/Lab_03/04/04.pdf",
+    "dig": "Simulation/Lab_03/04/Template-04.dig",
+    "ods": "Simulation/Lab_03/04/04.ods",
+    "csv": null,
+    "hasNote": true,
+    "svg": "generated/svg/Simulation__Lab_03__04.svg",
+    "note": "generated/note/Simulation__Lab_03__04.html"
+  },
+  {
+    "id": "Simulation/Lab_04/01",
+    "title": "01",
+    "groupPath": [
+      "Simulation",
+      "Lab_04"
+    ],
+    "pdf": "Simulation/Lab_04/01/01.pdf",
+    "dig": "Simulation/Lab_04/01/Template.dig",
+    "ods": "Simulation/Lab_04/01/01.ods",
+    "csv": null,
+    "hasNote": true,
+    "svg": "generated/svg/Simulation__Lab_04__01.svg",
+    "note": "generated/note/Simulation__Lab_04__01.html"
+  },
+  {
+    "id": "Simulation/Lab_04/02",
+    "title": "02",
+    "groupPath": [
+      "Simulation",
+      "Lab_04"
+    ],
+    "pdf": "Simulation/Lab_04/02/02.pdf",
+    "dig": "Simulation/Lab_04/02/Template.dig",
+    "ods": "Simulation/Lab_04/02/02.ods",
+    "csv": null,
+    "hasNote": true,
+    "svg": "generated/svg/Simulation__Lab_04__02.svg",
+    "note": "generated/note/Simulation__Lab_04__02.html"
+  }
+]

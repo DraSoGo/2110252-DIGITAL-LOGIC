@@ -1,0 +1,19 @@
+{
+  "name": "diglo-problem-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "index": "node scripts/generate-manifest.mjs",
+    "tools": "node scripts/fetch-tools.mjs",
+    "render": "node scripts/render-svg.mjs && node scripts/render-notes.mjs",
+    "test": "node --test",
+    "lint": "node scripts/check-project.mjs",
+    "build": "node scripts/build.mjs",
+    "verify": "npm test && npm run lint && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

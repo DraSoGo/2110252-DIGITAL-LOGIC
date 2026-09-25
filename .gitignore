@@ -1,0 +1,10 @@
+dist/
+generated/
+tools/
+node_modules/
+.DS_Store
+desktop.ini
+.~lock.*#
+*.log
+.agent-spec.md
+.playwright-mcp/
