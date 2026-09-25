@@ -1,5 +1,6 @@
 import { buildTree, countTree, filterProblems, pageRoute, resolveProblemByIdOrAlias, summarize } from './lib/content.js';
 import { createSvgViewer } from './lib/svg-viewer.js';
+import { interactivePageHref } from './lib/interactive-problem.js';
 import { TABS, isTabAvailable } from './lib/tabs.js';
 
 const app = document.querySelector('#app');
@@ -253,6 +254,7 @@ function problemMarkup(p) {
       <section class="tab-panel" id="panel-solution" role="tabpanel" aria-labelledby="tab-solution" tabindex="0" hidden>
         ${p.dig ? `<div class="resource-toolbar"><span class="file-chip">${icon('circuit')}<code>${escapeHtml(basename(p.dig))}</code></span><div class="actions">
             <div class="zoom-group"><button type="button" data-zoom="in" title="Zoom in">+</button><button type="button" data-zoom="out" title="Zoom out">−</button><button type="button" data-zoom="fit" title="Fit to view">FIT</button><button type="button" data-zoom="reset" title="Reset zoom">1:1</button></div>
+            <a class="primary" target="_blank" rel="noopener" href="${escapeHtml(interactivePageHref(p.id))}">OPEN INTERACTIVE${icon('external')}</a>
             ${p.svg ? toolbarLink(asset(p.dig), 'DOWNLOAD .DIG', { primary: true, download: true }) : ''}
             ${p.svg ? toolbarLink(asset(p.svg), 'SVG', { download: true }) : ''}
           </div></div>

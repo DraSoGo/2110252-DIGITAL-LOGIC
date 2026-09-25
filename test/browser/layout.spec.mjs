@@ -27,3 +27,18 @@ test('compact tabs are at most 40 pixels tall on desktop', async ({ page }) => {
   await expect(page.locator('.tab-bar')).toBeVisible();
   await expect(page.locator('.tab-bar')).toHaveJSProperty('clientHeight', 40);
 });
+
+test('interactive page keeps a source-download fallback when CheerpJ cannot load', async ({ page }) => {
+  await page.route('**/loader.js', (route) => route.abort());
+  await page.goto('/interactive.html?problem=simulation%2Flab-01%2F01');
+  await expect(page.getByRole('heading', { name: 'Digital could not start' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'DOWNLOAD SOURCE .DIG' })).toHaveAttribute('href', /content\/simulation\/lab-01\/01\/solution\.dig$/);
+  await expect(page.getByRole('link', { name: /RETURN TO PROBLEM/ })).toBeVisible();
+});
+
+test('interactive page preserves the project subpath in source links', async ({ page }) => {
+  await page.route('**/loader.js', (route) => route.abort());
+  await page.goto('/2110252-DIGITAL-LOGIC/interactive.html?problem=simulation%2Flab-01%2F01');
+  await expect(page.getByRole('heading', { name: 'Digital could not start' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'DOWNLOAD SOURCE .DIG' })).toHaveAttribute('href', /2110252-DIGITAL-LOGIC\/content\/simulation\/lab-01\/01\/solution\.dig$/);
+});

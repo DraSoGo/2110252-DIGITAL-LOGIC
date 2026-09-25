@@ -36,7 +36,7 @@ await writeFile(path.join(root, 'data', 'site.json'), `${JSON.stringify(site, nu
 await rm(dist, { recursive: true, force: true });
 await mkdir(dist, { recursive: true });
 
-for (const entry of ['index.html', 'src', 'data', 'generated']) {
+for (const entry of ['index.html', 'interactive.html', 'src', 'data', 'generated']) {
   if (await stat(path.join(root, entry)).catch(() => null)) {
     await cp(path.join(root, entry), path.join(dist, entry), { recursive: true });
   }
