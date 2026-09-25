@@ -1,4 +1,4 @@
-import { buildTree, countTree, filterProblems, pageRoute, summarize } from './lib/content.js';
+import { buildTree, countTree, filterProblems, pageRoute, resolveProblemByIdOrAlias, summarize } from './lib/content.js';
 import { createSvgViewer } from './lib/svg-viewer.js';
 import { TABS, isTabAvailable } from './lib/tabs.js';
 
@@ -26,9 +26,10 @@ function escapeHtml(value) {
 
 function asset(path) { return new URL(path, document.baseURI).href; }
 function basename(path) { return path ? path.split('/').pop() : ''; }
+
 function activeProblem() {
   const { problemId } = pageRoute(location.hash);
-  return problemId ? state.problems.find((p) => p.id === problemId) || null : null;
+  return problemId ? resolveProblemByIdOrAlias(state.problems, problemId) : null;
 }
 
 /* ---------- Boot state lifecycle ---------- */
@@ -334,9 +335,14 @@ function route() {
   if (state.viewer) { state.viewer.destroy(); state.viewer = null; }
   solutionToken++;
   const { page, problemId } = pageRoute(location.hash);
-  const problem = problemId ? state.problems.find((p) => p.id === problemId) : null;
+  const problem = problemId ? resolveProblemByIdOrAlias(state.problems, problemId) : null;
   const main = document.querySelector('#main');
   if (page === 'problem' && problem) {
+    // Legacy alias routes resolve to their problem, then the URL is rewritten
+    // to the canonical route without a reload.
+    if (problemId !== problem.id) {
+      history.replaceState(null, '', `#/problem/${encodeURIComponent(problem.id)}`);
+    }
     document.title = `${problem.title} — 2110252 Digital Logic Atlas`;
     main.innerHTML = problemMarkup(problem);
     bindProblemPage(problem);

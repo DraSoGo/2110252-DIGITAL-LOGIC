@@ -2,11 +2,11 @@ import { spawn } from 'node:child_process';
 import { cp, mkdir, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { scanProblemLibrary } from './lib/manifest.mjs';
+import { buildSiteRecords, scanContent } from './lib/manifest.mjs';
+import { copyContentTree } from './lib/dist-copy.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
-const flat = (id) => id.split('/').join('__');
 
 function run(script) {
   return new Promise((resolve, reject) => {
@@ -19,15 +19,18 @@ function run(script) {
 await run('render-svg.mjs');
 await run('render-notes.mjs');
 
-const problems = await scanProblemLibrary(root);
-const site = problems.map((p) => ({
-  ...p,
-  svg: p.dig ? `generated/svg/${flat(p.id)}.svg` : null,
-  note: p.ods || p.csv ? `generated/note/${flat(p.id)}.html` : null,
-}));
+let result;
+try {
+  result = await scanContent(root);
+} catch (error) {
+  console.error(`✗ Content validation failed${error.file ? ` (${error.file})` : ''}: ${error.message}`);
+  process.exit(1);
+}
+
+const site = buildSiteRecords(result.problems);
 
 await mkdir(path.join(root, 'data'), { recursive: true });
-await writeFile(path.join(root, 'data', 'problems.json'), `${JSON.stringify(problems, null, 2)}\n`);
+await writeFile(path.join(root, 'data', 'problems.json'), `${JSON.stringify(result.problems, null, 2)}\n`);
 await writeFile(path.join(root, 'data', 'site.json'), `${JSON.stringify(site, null, 2)}\n`);
 
 await rm(dist, { recursive: true, force: true });
@@ -39,15 +42,11 @@ for (const entry of ['index.html', 'src', 'data', 'generated']) {
   }
 }
 
-let copied = 0;
-for (const problem of site) {
-  for (const file of [problem.pdf, problem.dig, problem.ods, problem.csv]) {
-    if (!file) continue;
-    const target = path.join(dist, file);
-    await mkdir(path.dirname(target), { recursive: true });
-    await cp(path.join(root, file), target);
-    copied++;
-  }
+// Copy content resources into dist without configs (metadata.json/group.json)
+// and without junk — the browser only consumes generated manifests.
+if (await stat(path.join(root, 'content')).catch(() => null)) {
+  await copyContentTree(path.join(root, 'content'), path.join(dist, 'content'));
 }
+
 await writeFile(path.join(dist, '.nojekyll'), '');
-console.log(`Built dist/ — ${site.length} problems, ${copied} source files copied.`);
+console.log(`Built dist/ — ${site.length} problems, ${site.filter((p) => p.pdf).length} statements, ${site.filter((p) => p.dig).length} solutions, ${site.filter((p) => p.hasNote).length} notes.`);

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-01/04",
+  "aliases": [
+    "Simulation/Lab_01/04"
+  ],
+  "title": "04",
+  "order": 4,
+  "kind": "lab"
+}

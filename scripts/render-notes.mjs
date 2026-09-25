@@ -1,10 +1,10 @@
 import { spawn } from 'node:child_process';
-import { copyFile, mkdir, mkdtemp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { parseCsv } from '../src/lib/content.js';
-import { scanProblemLibrary } from './lib/manifest.mjs';
+import { scanContent } from './lib/manifest.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outDir = path.join(root, 'generated', 'note');
@@ -52,14 +52,30 @@ async function odsToHtml(source, workDir) {
   const imageNames = (await readdir(workDir)).filter((name) => /\.(png|gif|jpe?g)$/i.test(name));
   for (const image of imageNames) {
     const base64 = Buffer.from(await readFile(path.join(workDir, image))).toString('base64');
-    html = html.split(`src="${image}"`).join(`src="data:image/${image.endsWith('.jpg') ? 'jpeg' : image.split('.').pop().toLowerCase()};base64,${base64}"`);
+    const ext = image.split('.').pop().toLowerCase();
+    const mime = ext === 'jpg' ? 'jpeg' : ext;
+    html = html.split(`src="${image}"`).join(`src="data:image/${mime};base64,${base64}"`);
   }
   return html;
 }
 
-const problems = await scanProblemLibrary(root);
-const targets = problems.filter((p) => p.ods || p.csv);
+let result;
+try {
+  result = await scanContent(root);
+} catch (error) {
+  console.error(`✗ Content validation failed${error.file ? ` (${error.file})` : ''}: ${error.message}`);
+  process.exit(1);
+}
+
+const targets = result.problems.filter((p) => p.ods || p.csv);
 await mkdir(outDir, { recursive: true });
+
+// Drop notes whose problem no longer exists.
+const expected = new Set(targets.map((p) => `${flatId(p.id)}.html`));
+const existing = await readdir(outDir).catch(() => []);
+for (const name of existing.filter((name) => name.endsWith('.html') && !expected.has(name))) {
+  await rm(path.join(outDir, name), { force: true });
+}
 
 let rendered = 0;
 let skipped = 0;

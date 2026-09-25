@@ -1,10 +1,23 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { scanProblemLibrary } from './lib/manifest.mjs';
+import { buildSiteRecords, scanContent } from './lib/manifest.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const problems = await scanProblemLibrary(root);
+
+let result;
+try {
+  result = await scanContent(root);
+} catch (error) {
+  const location = error.file ? ` (${error.file}${error.field ? ` field: ${error.field}` : ''})` : '';
+  console.error(`✗ Content validation failed${location}: ${error.message}`);
+  process.exit(1);
+}
+
+// Validate fully before writing — a failed scan must never produce a partial manifest.
 await mkdir(path.join(root, 'data'), { recursive: true });
-await writeFile(path.join(root, 'data', 'problems.json'), `${JSON.stringify(problems, null, 2)}\n`);
-console.log(`Indexed ${problems.length} problems across ${new Set(problems.flatMap((p) => p.groupPath)).size} groups.`);
+await writeFile(path.join(root, 'data', 'problems.json'), `${JSON.stringify(result.problems, null, 2)}\n`);
+await writeFile(path.join(root, 'data', 'site.json'), `${JSON.stringify(buildSiteRecords(result.problems), null, 2)}\n`);
+
+for (const warning of result.warnings) console.warn(`  ⚠ ${warning}`);
+console.log(`Indexed ${result.problems.length} problems across ${result.groups.length} groups (${result.warnings.length} warning(s)).`);

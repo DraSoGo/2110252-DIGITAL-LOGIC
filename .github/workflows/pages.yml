@@ -45,14 +45,14 @@ jobs:
       - name: Fetch Digital simulator tool
         run: npm run tools
 
+      - name: Build production site
+        run: npm run build
+
       - name: Run tests
         run: npm test
 
       - name: Audit content
         run: npm run lint
-
-      - name: Build production site
-        run: npm run build
 
       - name: Configure GitHub Pages
         if: github.event_name != 'pull_request'

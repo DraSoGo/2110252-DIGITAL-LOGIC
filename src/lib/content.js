@@ -1,7 +1,3 @@
-export function prettifyTitle(name) {
-  return name.replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
-}
-
 export function buildTree(problems) {
   const root = { name: '', path: '', children: [], problems: [] };
   for (const problem of problems) {
@@ -16,13 +12,13 @@ export function buildTree(problems) {
     }
     node.problems.push(problem);
   }
-  sortTree(root);
   numberSiblings(root.children);
   return root.children;
 }
 
-// Local ordering per parent: every sibling collection restarts at 1,
-// so Lab_01 under Simulation is 01 even after Exam1's children 66/67/68.
+// Codes restart per parent. Sibling order comes from the manifest, which is
+// config-driven (group.json / metadata.json order fields) — never re-sorted
+// by name here.
 function numberSiblings(nodes, offset = 0) {
   nodes.forEach((node, index) => {
     node.code = String(offset + index + 1).padStart(2, '0');
@@ -30,12 +26,6 @@ function numberSiblings(nodes, offset = 0) {
   });
 }
 
-function sortTree(node) {
-  node.children.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' }));
-  node.problems.sort((a, b) => a.title.localeCompare(b.title, undefined, { numeric: true, sensitivity: 'base' }));
-  for (const child of node.children) sortTree(child);
-  return node;
-}
 export function countTree(node) {
   let count = node.problems?.length || 0;
   if (node.children) for (const child of node.children) count += countTree(child);
@@ -44,10 +34,15 @@ export function countTree(node) {
 
 export function filterProblems(problems, { query }) {
   if (!query) return problems;
-  const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+  // Both sides are underscore-normalised so "Lab_03" matches "Lab 03" and
+  // legacy alias spellings keep working in search.
+  const words = query.toLowerCase().replace(/_/g, ' ').split(/\s+/).filter(Boolean);
   if (!words.length) return problems;
   return problems.filter((problem) => {
-    const haystack = `${problem.title} ${problem.id}`.toLowerCase().replace(/_/g, ' ');
+    const haystack = [problem.title, problem.id, ...(problem.aliases || []), ...(problem.groupPath || [])]
+      .join(' ')
+      .toLowerCase()
+      .replace(/_/g, ' ');
     return words.every((word) => haystack.includes(word));
   });
 }
@@ -67,6 +62,12 @@ export function summarize(problems) {
     digs: problems.filter((problem) => problem.dig).length,
     notes: problems.filter((problem) => problem.ods || problem.csv).length,
   };
+}
+
+/** Resolves a route id: canonical id first, then any registered alias. */
+export function resolveProblemByIdOrAlias(problems, idOrAlias) {
+  if (!idOrAlias) return null;
+  return problems.find((p) => p.id === idOrAlias || (Array.isArray(p.aliases) && p.aliases.includes(idOrAlias))) || null;
 }
 
 export function parseCsv(text) {

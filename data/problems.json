@@ -1,363 +1,503 @@
 [
   {
-    "id": "Exam1/66/01",
+    "id": "exam-1/66/01",
+    "aliases": [
+      "Exam1/66/01"
+    ],
     "title": "01",
+    "kind": "exam",
+    "order": 1,
     "groupPath": [
       "Exam1",
       "66"
     ],
-    "pdf": "Exam1/66/01/DigLo66_Quiz1__01.pdf",
-    "dig": "Exam1/66/01/DigLo66_Quiz1__01.dig",
+    "pdf": "content/exam-1/66/01/statement.pdf",
+    "dig": "content/exam-1/66/01/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Exam1/66/02",
+    "id": "exam-1/66/02",
+    "aliases": [
+      "Exam1/66/02"
+    ],
     "title": "02",
+    "kind": "exam",
+    "order": 2,
     "groupPath": [
       "Exam1",
       "66"
     ],
-    "pdf": "Exam1/66/02/DigLo66_Quiz1__02.pdf",
-    "dig": "Exam1/66/02/DigLo66_Quiz1__02.dig",
+    "pdf": "content/exam-1/66/02/statement.pdf",
+    "dig": "content/exam-1/66/02/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Exam1/67/01",
+    "id": "exam-1/67/01",
+    "aliases": [
+      "Exam1/67/01"
+    ],
     "title": "01",
+    "kind": "exam",
+    "order": 1,
     "groupPath": [
       "Exam1",
       "67"
     ],
-    "pdf": "Exam1/67/01/DigLo67_Exam1__01.pdf",
-    "dig": "Exam1/67/01/DigLo67_Exam1__01.dig",
+    "pdf": "content/exam-1/67/01/statement.pdf",
+    "dig": "content/exam-1/67/01/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Exam1/67/02",
+    "id": "exam-1/67/02",
+    "aliases": [
+      "Exam1/67/02"
+    ],
     "title": "02",
+    "kind": "exam",
+    "order": 2,
     "groupPath": [
       "Exam1",
       "67"
     ],
-    "pdf": "Exam1/67/02/DigLo67_Exam1__02.pdf",
-    "dig": "Exam1/67/02/DigLo67_Exam1__02.dig",
+    "pdf": "content/exam-1/67/02/statement.pdf",
+    "dig": "content/exam-1/67/02/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Exam1/68/01",
+    "id": "exam-1/68/01",
+    "aliases": [
+      "Exam1/68/01"
+    ],
     "title": "01",
+    "kind": "exam",
+    "order": 1,
     "groupPath": [
       "Exam1",
       "68"
     ],
-    "pdf": "Exam1/68/01/DigLo68_Exam1__1.pdf",
-    "dig": "Exam1/68/01/DigLo68_Exam1__1.dig",
+    "pdf": "content/exam-1/68/01/statement.pdf",
+    "dig": "content/exam-1/68/01/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Exam1/68/02",
+    "id": "exam-1/68/02",
+    "aliases": [
+      "Exam1/68/02"
+    ],
     "title": "02",
+    "kind": "exam",
+    "order": 2,
     "groupPath": [
       "Exam1",
       "68"
     ],
-    "pdf": "Exam1/68/02/DigLo68_Exam1__2.pdf",
-    "dig": "Exam1/68/02/DigLo68_Exam1__2.dig",
+    "pdf": "content/exam-1/68/02/statement.pdf",
+    "dig": "content/exam-1/68/02/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Exam1/68/03",
+    "id": "exam-1/68/03",
+    "aliases": [
+      "Exam1/68/03"
+    ],
     "title": "03",
+    "kind": "exam",
+    "order": 3,
     "groupPath": [
       "Exam1",
       "68"
     ],
-    "pdf": "Exam1/68/03/DigLo68_Exam1__3.pdf",
-    "dig": "Exam1/68/03/DigLo68_Exam1__3.dig",
+    "pdf": "content/exam-1/68/03/statement.pdf",
+    "dig": "content/exam-1/68/03/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Learn/Full_Address_1",
+    "id": "learn/full-address-1",
+    "aliases": [
+      "Learn/Full_Address_1"
+    ],
     "title": "Full Address 1",
+    "kind": "learning",
+    "order": 1,
     "groupPath": [
       "Learn"
     ],
     "pdf": null,
-    "dig": "Learn/Full_Address_1/fulladdress.dig",
-    "ods": "Learn/Full_Address_1/full_address.ods",
+    "dig": "content/learn/full-address-1/solution.dig",
+    "ods": "content/learn/full-address-1/note.ods",
     "csv": null,
     "hasNote": true
   },
   {
-    "id": "Learn/Full_Address_2",
+    "id": "learn/full-address-2",
+    "aliases": [
+      "Learn/Full_Address_2"
+    ],
     "title": "Full Address 2",
+    "kind": "learning",
+    "order": 2,
     "groupPath": [
       "Learn"
     ],
     "pdf": null,
-    "dig": "Learn/Full_Address_2/fulladdress2.dig",
+    "dig": "content/learn/full-address-2/solution.dig",
     "ods": null,
-    "csv": "Learn/Full_Address_2/fulladdress2.csv",
+    "csv": "content/learn/full-address-2/note.csv",
     "hasNote": true
   },
   {
-    "id": "Simulation/Lab_01/01",
+    "id": "simulation/lab-01/01",
+    "aliases": [
+      "Simulation/Lab_01/01"
+    ],
     "title": "01",
+    "kind": "lab",
+    "order": 1,
     "groupPath": [
       "Simulation",
       "Lab_01"
     ],
-    "pdf": "Simulation/Lab_01/01/01.pdf",
-    "dig": "Simulation/Lab_01/01/01_Template.dig",
+    "pdf": "content/simulation/lab-01/01/statement.pdf",
+    "dig": "content/simulation/lab-01/01/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_01/02",
+    "id": "simulation/lab-01/02",
+    "aliases": [
+      "Simulation/Lab_01/02"
+    ],
     "title": "02",
+    "kind": "lab",
+    "order": 2,
     "groupPath": [
       "Simulation",
       "Lab_01"
     ],
-    "pdf": "Simulation/Lab_01/02/02.pdf",
-    "dig": "Simulation/Lab_01/02/02_Template.dig",
+    "pdf": "content/simulation/lab-01/02/statement.pdf",
+    "dig": "content/simulation/lab-01/02/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_01/03",
+    "id": "simulation/lab-01/03",
+    "aliases": [
+      "Simulation/Lab_01/03"
+    ],
     "title": "03",
+    "kind": "lab",
+    "order": 3,
     "groupPath": [
       "Simulation",
       "Lab_01"
     ],
-    "pdf": "Simulation/Lab_01/03/03.pdf",
-    "dig": "Simulation/Lab_01/03/03_Template.dig",
+    "pdf": "content/simulation/lab-01/03/statement.pdf",
+    "dig": "content/simulation/lab-01/03/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_01/04",
+    "id": "simulation/lab-01/04",
+    "aliases": [
+      "Simulation/Lab_01/04"
+    ],
     "title": "04",
+    "kind": "lab",
+    "order": 4,
     "groupPath": [
       "Simulation",
       "Lab_01"
     ],
-    "pdf": "Simulation/Lab_01/04/04.pdf",
-    "dig": "Simulation/Lab_01/04/04_Template.dig",
+    "pdf": "content/simulation/lab-01/04/statement.pdf",
+    "dig": "content/simulation/lab-01/04/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/01",
+    "id": "simulation/lab-02/01",
+    "aliases": [
+      "Simulation/Lab_02/01"
+    ],
     "title": "01",
+    "kind": "lab",
+    "order": 1,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/01/01.pdf",
-    "dig": "Simulation/Lab_02/01/Template.dig",
+    "pdf": "content/simulation/lab-02/01/statement.pdf",
+    "dig": "content/simulation/lab-02/01/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/02",
+    "id": "simulation/lab-02/02",
+    "aliases": [
+      "Simulation/Lab_02/02"
+    ],
     "title": "02",
+    "kind": "lab",
+    "order": 2,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/02/02.pdf",
-    "dig": "Simulation/Lab_02/02/Template.dig",
+    "pdf": "content/simulation/lab-02/02/statement.pdf",
+    "dig": "content/simulation/lab-02/02/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/03",
+    "id": "simulation/lab-02/03",
+    "aliases": [
+      "Simulation/Lab_02/03"
+    ],
     "title": "03",
+    "kind": "lab",
+    "order": 3,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/03/03.pdf",
-    "dig": "Simulation/Lab_02/03/Template.dig",
+    "pdf": "content/simulation/lab-02/03/statement.pdf",
+    "dig": "content/simulation/lab-02/03/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/04",
+    "id": "simulation/lab-02/04",
+    "aliases": [
+      "Simulation/Lab_02/04"
+    ],
     "title": "04",
+    "kind": "lab",
+    "order": 4,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/04/04.pdf",
-    "dig": "Simulation/Lab_02/04/Template.dig",
+    "pdf": "content/simulation/lab-02/04/statement.pdf",
+    "dig": "content/simulation/lab-02/04/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/05",
+    "id": "simulation/lab-02/05",
+    "aliases": [
+      "Simulation/Lab_02/05"
+    ],
     "title": "05",
+    "kind": "lab",
+    "order": 5,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/05/05.pdf",
-    "dig": "Simulation/Lab_02/05/Template.dig",
+    "pdf": "content/simulation/lab-02/05/statement.pdf",
+    "dig": "content/simulation/lab-02/05/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/06",
+    "id": "simulation/lab-02/06",
+    "aliases": [
+      "Simulation/Lab_02/06"
+    ],
     "title": "06",
+    "kind": "lab",
+    "order": 6,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/06/06.pdf",
-    "dig": "Simulation/Lab_02/06/Template.dig",
+    "pdf": "content/simulation/lab-02/06/statement.pdf",
+    "dig": "content/simulation/lab-02/06/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/07",
+    "id": "simulation/lab-02/07",
+    "aliases": [
+      "Simulation/Lab_02/07"
+    ],
     "title": "07",
+    "kind": "lab",
+    "order": 7,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/07/07.pdf",
-    "dig": "Simulation/Lab_02/07/Template.dig",
+    "pdf": "content/simulation/lab-02/07/statement.pdf",
+    "dig": "content/simulation/lab-02/07/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/08",
+    "id": "simulation/lab-02/08",
+    "aliases": [
+      "Simulation/Lab_02/08"
+    ],
     "title": "08",
+    "kind": "lab",
+    "order": 8,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/08/08.pdf",
-    "dig": "Simulation/Lab_02/08/Template.dig",
+    "pdf": "content/simulation/lab-02/08/statement.pdf",
+    "dig": "content/simulation/lab-02/08/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_02/09",
+    "id": "simulation/lab-02/09",
+    "aliases": [
+      "Simulation/Lab_02/09"
+    ],
     "title": "09",
+    "kind": "lab",
+    "order": 9,
     "groupPath": [
       "Simulation",
       "Lab_02"
     ],
-    "pdf": "Simulation/Lab_02/09/09.pdf",
-    "dig": "Simulation/Lab_02/09/Template.dig",
+    "pdf": "content/simulation/lab-02/09/statement.pdf",
+    "dig": "content/simulation/lab-02/09/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
   },
   {
-    "id": "Simulation/Lab_03/01",
+    "id": "simulation/lab-03/01",
+    "aliases": [
+      "Simulation/Lab_03/01"
+    ],
     "title": "01",
+    "kind": "lab",
+    "order": 1,
     "groupPath": [
       "Simulation",
       "Lab_03"
     ],
-    "pdf": "Simulation/Lab_03/01/01.pdf",
-    "dig": "Simulation/Lab_03/01/Template-01.dig",
-    "ods": "Simulation/Lab_03/01/01.ods",
+    "pdf": "content/simulation/lab-03/01/statement.pdf",
+    "dig": "content/simulation/lab-03/01/solution.dig",
+    "ods": "content/simulation/lab-03/01/note.ods",
     "csv": null,
     "hasNote": true
   },
   {
-    "id": "Simulation/Lab_03/02",
+    "id": "simulation/lab-03/02",
+    "aliases": [
+      "Simulation/Lab_03/02"
+    ],
     "title": "02",
+    "kind": "lab",
+    "order": 2,
     "groupPath": [
       "Simulation",
       "Lab_03"
     ],
-    "pdf": "Simulation/Lab_03/02/02.pdf",
-    "dig": "Simulation/Lab_03/02/Template-02.dig",
-    "ods": "Simulation/Lab_03/02/02.ods",
+    "pdf": "content/simulation/lab-03/02/statement.pdf",
+    "dig": "content/simulation/lab-03/02/solution.dig",
+    "ods": "content/simulation/lab-03/02/note.ods",
     "csv": null,
     "hasNote": true
   },
   {
-    "id": "Simulation/Lab_03/03",
+    "id": "simulation/lab-03/03",
+    "aliases": [
+      "Simulation/Lab_03/03"
+    ],
     "title": "03",
+    "kind": "lab",
+    "order": 3,
     "groupPath": [
       "Simulation",
       "Lab_03"
     ],
-    "pdf": "Simulation/Lab_03/03/03.pdf",
-    "dig": "Simulation/Lab_03/03/Template-03.dig",
-    "ods": "Simulation/Lab_03/03/03.ods",
+    "pdf": "content/simulation/lab-03/03/statement.pdf",
+    "dig": "content/simulation/lab-03/03/solution.dig",
+    "ods": "content/simulation/lab-03/03/note.ods",
     "csv": null,
     "hasNote": true
   },
   {
-    "id": "Simulation/Lab_03/04",
+    "id": "simulation/lab-03/04",
+    "aliases": [
+      "Simulation/Lab_03/04"
+    ],
     "title": "04",
+    "kind": "lab",
+    "order": 4,
     "groupPath": [
       "Simulation",
       "Lab_03"
     ],
-    "pdf": "Simulation/Lab_03/04/04.pdf",
-    "dig": "Simulation/Lab_03/04/Template-04.dig",
-    "ods": "Simulation/Lab_03/04/04.ods",
+    "pdf": "content/simulation/lab-03/04/statement.pdf",
+    "dig": "content/simulation/lab-03/04/solution.dig",
+    "ods": "content/simulation/lab-03/04/note.ods",
     "csv": null,
     "hasNote": true
   },
   {
-    "id": "Simulation/Lab_04/01",
+    "id": "simulation/lab-04/01",
+    "aliases": [
+      "Simulation/Lab_04/01"
+    ],
     "title": "01",
+    "kind": "lab",
+    "order": 1,
     "groupPath": [
       "Simulation",
       "Lab_04"
     ],
-    "pdf": "Simulation/Lab_04/01/01.pdf",
-    "dig": "Simulation/Lab_04/01/Template.dig",
-    "ods": "Simulation/Lab_04/01/01.ods",
+    "pdf": "content/simulation/lab-04/01/statement.pdf",
+    "dig": "content/simulation/lab-04/01/solution.dig",
+    "ods": "content/simulation/lab-04/01/note.ods",
     "csv": null,
     "hasNote": true
   },
   {
-    "id": "Simulation/Lab_04/02",
+    "id": "simulation/lab-04/02",
+    "aliases": [
+      "Simulation/Lab_04/02"
+    ],
     "title": "02",
+    "kind": "lab",
+    "order": 2,
     "groupPath": [
       "Simulation",
       "Lab_04"
     ],
-    "pdf": "Simulation/Lab_04/02/02.pdf",
-    "dig": "Simulation/Lab_04/02/Template.dig",
-    "ods": "Simulation/Lab_04/02/02.ods",
+    "pdf": "content/simulation/lab-04/02/statement.pdf",
+    "dig": "content/simulation/lab-04/02/solution.dig",
+    "ods": "content/simulation/lab-04/02/note.ods",
     "csv": null,
     "hasNote": true
   }

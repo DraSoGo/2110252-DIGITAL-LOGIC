@@ -11,7 +11,7 @@
     "test": "node --test",
     "lint": "node scripts/check-project.mjs",
     "build": "node scripts/build.mjs",
-    "verify": "npm test && npm run lint && npm run build"
+    "verify": "npm run build && npm test && npm run lint"
   },
   "engines": {
     "node": ">=20"
