@@ -585,7 +585,9 @@ kbd {
    min-height (not height) lets #main scroll when short screens force the
    viewer minimum heights taller than the available space. */
 .problem-view {
-  min-height: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   padding: 14px clamp(16px, 3vw, 34px) 14px;
@@ -652,6 +654,7 @@ kbd {
 
 .problem-body {
   min-height: 0;
+  min-width: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -919,7 +922,7 @@ kbd {
   align-items: center;
   gap: 10px;
   padding: 0 16px;
-  height: 52px;
+  height: 40px;
   border: 0;
   border-right: 1px solid var(--line);
   background: transparent;
@@ -967,6 +970,7 @@ kbd {
   background: var(--panel);
   overflow: hidden;
   min-height: 0;
+  min-width: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -983,7 +987,8 @@ kbd {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  padding: 8px 14px;
+  min-height: 36px;
+  padding: 2px 12px;
   border-bottom: 1px solid var(--line);
   background: var(--panel-2);
   flex-shrink: 0;
@@ -1023,7 +1028,8 @@ kbd {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 12px;
+  min-height: 32px;
+  padding: 4px 10px;
   border: 1px solid var(--line-2);
   background: transparent;
   color: var(--muted);
@@ -1066,7 +1072,7 @@ kbd {
 .resource-toolbar .zoom-group button {
   border: 0;
   border-right: 1px solid var(--line-2);
-  padding: 7px 10px;
+  padding: 4px 8px;
   min-width: 34px;
   justify-content: center;
 }
@@ -1091,14 +1097,14 @@ kbd {
 #solution-viewer {
   flex: 1;
   min-height: 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
 
 .svg-frame {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
   width: 100%;
   flex: 1;
   min-height: 0;
@@ -1111,13 +1117,15 @@ kbd {
 
 .svg-viewport {
   width: 100%;
-  height: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
   cursor: grab;
   user-select: none;
   touch-action: none;
   overflow: hidden;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
 }
 
@@ -1206,7 +1214,9 @@ kbd {
 .note-frame iframe {
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  flex: 1 1 auto;
+  min-height: 0;
   border: 0;
   background: #ffffff;
 }
@@ -1565,4 +1575,71 @@ kbd {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ---------- Full-screen Digital simulator ---------- */
+
+.interactive-page {
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.interactive-header {
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  font: 9px var(--mono);
+  letter-spacing: 0.08em;
+}
+
+.interactive-header a {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+.interactive-header > div {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+  text-align: center;
+}
+
+.interactive-header strong { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.interactive-header span { color: var(--muted); font-size: 8px; }
+
+.interactive-main { position: relative; min-width: 0; min-height: 0; background: var(--panel-3); }
+#digital-display { position: absolute; inset: 0; }
+
+.interactive-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  padding: 28px;
+  text-align: center;
+  background: var(--bg);
+}
+
+.interactive-fallback code { color: var(--red); font: 10px var(--mono); }
+.interactive-fallback h1 { margin: 0; font: 600 22px var(--mono); }
+.interactive-fallback p { max-width: 560px; margin: 0; color: var(--muted); }
+
+@media (max-width: 640px) {
+  .interactive-header { grid-template-columns: 1fr auto; }
+  .interactive-header > div { grid-column: 1 / -1; grid-row: 1; text-align: left; }
+  .interactive-header a { font-size: 8px; }
+  #interactive-download { justify-content: flex-end; }
 }

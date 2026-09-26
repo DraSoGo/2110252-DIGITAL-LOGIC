@@ -16,6 +16,10 @@ const MIN_SCALE = 0.1;
 const MAX_SCALE = 20;
 const FIT_PADDING = 28;
 
+export function shouldZoomOnWheel(event) {
+  return Boolean(event.ctrlKey || event.metaKey);
+}
+
 export function createSvgViewer(container) {
   if (!container) throw new Error('createSvgViewer: container is required');
 
@@ -135,6 +139,7 @@ export function createSvgViewer(container) {
 
   function onWheel(event) {
     if (!svgEl) return;
+    if (!shouldZoomOnWheel(event)) return;
     event.preventDefault();
     const rect = viewport.getBoundingClientRect();
     const factor = event.deltaY < 0 ? WHEEL_FACTOR : 1 / WHEEL_FACTOR;

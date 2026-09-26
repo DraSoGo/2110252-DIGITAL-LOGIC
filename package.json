@@ -8,12 +8,16 @@
     "index": "node scripts/generate-manifest.mjs",
     "tools": "node scripts/fetch-tools.mjs",
     "render": "node scripts/render-svg.mjs && node scripts/render-notes.mjs",
-    "test": "node --test",
+    "test": "node --test test/*.test.mjs",
+    "test:browser": "node ./node_modules/@playwright/test/cli.js test",
     "lint": "node scripts/check-project.mjs",
     "build": "node scripts/build.mjs",
     "verify": "npm run build && npm test && npm run lint"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
   }
 }

@@ -29,6 +29,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install Node.js dependencies
+        run: npm ci
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
@@ -45,11 +48,17 @@ jobs:
       - name: Fetch Digital simulator tool
         run: npm run tools
 
+      - name: Install browser test runtime
+        run: npx playwright install --with-deps chromium
+
       - name: Build production site
         run: npm run build
 
       - name: Run tests
         run: npm test
+
+      - name: Run browser tests
+        run: npm run test:browser
 
       - name: Audit content
         run: npm run lint
