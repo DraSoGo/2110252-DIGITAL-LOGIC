@@ -4,7 +4,7 @@
   "aliases": [
     "Simulation/Lab_02/01"
   ],
-  "title": "01",
+  "title": "XOR (Sum of Products)",
   "order": 1,
   "kind": "lab"
 }

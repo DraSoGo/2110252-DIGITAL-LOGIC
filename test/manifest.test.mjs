@@ -374,6 +374,13 @@ test('every baseline problem id resolves via alias in the migrated tree', async 
   for (const old of baseline) {
     const resolved = resolveProblemByIdOrAlias(current, old.id);
     assert.ok(resolved, `old id "${old.id}" must resolve through aliases`);
-    assert.equal(resolved.title, old.title, `title preserved for ${old.id}`);
+    // Titles now come from statement headings (see "chore: name problems from
+    // statement headings") — a bare numeric leaf title means the rename was
+    // lost, so require a descriptive title instead of the baseline value.
+    assert.match(
+      resolved.title,
+      /(?:[A-Za-z]{2,}.*[A-Za-z]{2,}|[A-Za-z]{2,})/,
+      `title for ${old.id} must be a descriptive statement heading, got "${resolved.title}"`,
+    );
   }
 });

@@ -4,7 +4,7 @@
     "aliases": [
       "Exam1/66/01"
     ],
-    "title": "01",
+    "title": "4-bit Truth Table Function",
     "kind": "exam",
     "order": 1,
     "groupPath": [
@@ -22,7 +22,7 @@
     "aliases": [
       "Exam1/66/02"
     ],
-    "title": "02",
+    "title": "Population Count Adder/Subtractor",
     "kind": "exam",
     "order": 2,
     "groupPath": [
@@ -40,7 +40,7 @@
     "aliases": [
       "Exam1/67/01"
     ],
-    "title": "01",
+    "title": "4-input Static-1 Hazard-Free Circuit",
     "kind": "exam",
     "order": 1,
     "groupPath": [
@@ -58,7 +58,7 @@
     "aliases": [
       "Exam1/67/02"
     ],
-    "title": "02",
+    "title": "2-bit Exponentiation Circuit",
     "kind": "exam",
     "order": 2,
     "groupPath": [
@@ -76,7 +76,7 @@
     "aliases": [
       "Exam1/68/01"
     ],
-    "title": "01",
+    "title": "4-input Static-1 Hazard-Free Circuit",
     "kind": "exam",
     "order": 1,
     "groupPath": [
@@ -94,7 +94,7 @@
     "aliases": [
       "Exam1/68/02"
     ],
-    "title": "02",
+    "title": "Prime and Divisibility Detector",
     "kind": "exam",
     "order": 2,
     "groupPath": [
@@ -112,7 +112,7 @@
     "aliases": [
       "Exam1/68/03"
     ],
-    "title": "03",
+    "title": "Automatic Watering and Fertilizing Control",
     "kind": "exam",
     "order": 3,
     "groupPath": [
@@ -164,7 +164,7 @@
     "aliases": [
       "Simulation/Lab_01/01"
     ],
-    "title": "01",
+    "title": "Wire Connection",
     "kind": "lab",
     "order": 1,
     "groupPath": [
@@ -182,7 +182,7 @@
     "aliases": [
       "Simulation/Lab_01/02"
     ],
-    "title": "02",
+    "title": "Logic Gate",
     "kind": "lab",
     "order": 2,
     "groupPath": [
@@ -200,7 +200,7 @@
     "aliases": [
       "Simulation/Lab_01/03"
     ],
-    "title": "03",
+    "title": "Clock Gate",
     "kind": "lab",
     "order": 3,
     "groupPath": [
@@ -218,7 +218,7 @@
     "aliases": [
       "Simulation/Lab_01/04"
     ],
-    "title": "04",
+    "title": "Dual Clock",
     "kind": "lab",
     "order": 4,
     "groupPath": [
@@ -236,7 +236,7 @@
     "aliases": [
       "Simulation/Lab_02/01"
     ],
-    "title": "01",
+    "title": "XOR (Sum of Products)",
     "kind": "lab",
     "order": 1,
     "groupPath": [
@@ -254,7 +254,7 @@
     "aliases": [
       "Simulation/Lab_02/02"
     ],
-    "title": "02",
+    "title": "XOR (Product of Sums)",
     "kind": "lab",
     "order": 2,
     "groupPath": [
@@ -272,7 +272,7 @@
     "aliases": [
       "Simulation/Lab_02/03"
     ],
-    "title": "03",
+    "title": "FullAdder (Sum of Products)",
     "kind": "lab",
     "order": 3,
     "groupPath": [
@@ -290,7 +290,7 @@
     "aliases": [
       "Simulation/Lab_02/04"
     ],
-    "title": "04",
+    "title": "FullAdder (Product of Sums)",
     "kind": "lab",
     "order": 4,
     "groupPath": [
@@ -308,7 +308,7 @@
     "aliases": [
       "Simulation/Lab_02/05"
     ],
-    "title": "05",
+    "title": "Comparator (Sum of Products)",
     "kind": "lab",
     "order": 5,
     "groupPath": [
@@ -326,7 +326,7 @@
     "aliases": [
       "Simulation/Lab_02/06"
     ],
-    "title": "06",
+    "title": "Comparator (Product of Sums)",
     "kind": "lab",
     "order": 6,
     "groupPath": [
@@ -344,7 +344,7 @@
     "aliases": [
       "Simulation/Lab_02/07"
     ],
-    "title": "07",
+    "title": "Multiplexer (Sum of Products)",
     "kind": "lab",
     "order": 7,
     "groupPath": [
@@ -362,7 +362,7 @@
     "aliases": [
       "Simulation/Lab_02/08"
     ],
-    "title": "08",
+    "title": "Multiplexer (Product of Sums)",
     "kind": "lab",
     "order": 8,
     "groupPath": [
@@ -380,7 +380,7 @@
     "aliases": [
       "Simulation/Lab_02/09"
     ],
-    "title": "09",
+    "title": "MUX 4:1 (Sum of Products)",
     "kind": "lab",
     "order": 9,
     "groupPath": [
@@ -398,7 +398,7 @@
     "aliases": [
       "Simulation/Lab_03/01"
     ],
-    "title": "01",
+    "title": "BCD to Seven Segment Decoder",
     "kind": "lab",
     "order": 1,
     "groupPath": [
@@ -416,7 +416,7 @@
     "aliases": [
       "Simulation/Lab_03/02"
     ],
-    "title": "02",
+    "title": "DigLoLab ASCII",
     "kind": "lab",
     "order": 2,
     "groupPath": [
@@ -434,7 +434,7 @@
     "aliases": [
       "Simulation/Lab_03/03"
     ],
-    "title": "03",
+    "title": "Binary Encoder",
     "kind": "lab",
     "order": 3,
     "groupPath": [
@@ -452,7 +452,7 @@
     "aliases": [
       "Simulation/Lab_03/04"
     ],
-    "title": "04",
+    "title": "Hamming Code",
     "kind": "lab",
     "order": 4,
     "groupPath": [
@@ -470,7 +470,7 @@
     "aliases": [
       "Simulation/Lab_04/01"
     ],
-    "title": "01",
+    "title": "Glitch I",
     "kind": "lab",
     "order": 1,
     "groupPath": [
@@ -488,7 +488,7 @@
     "aliases": [
       "Simulation/Lab_04/02"
     ],
-    "title": "02",
+    "title": "Glitch II",
     "kind": "lab",
     "order": 2,
     "groupPath": [
