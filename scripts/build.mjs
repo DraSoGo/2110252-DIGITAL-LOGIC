@@ -28,14 +28,31 @@ function runCommand(command, args, options = {}) {
   });
 }
 
-async function patchDigitalJar(jarPath) {
-  const classPath = path.join('com', 'thoughtworks', 'xstream', 'core', 'JVM.class');
+async function patchDigitalJar(jarPath, patchesDir) {
   const temp = await mkdtemp(path.join(os.tmpdir(), 'diglo-digital-patch-'));
   try {
+    // 1. Bytecode patch: JVM.class skips XStream's unsupported Unsafe
+    //    field-write probe and selects SunLimitedUnsafeReflectionProvider.
+    const classPath = path.join('com', 'thoughtworks', 'xstream', 'core', 'JVM.class');
     await runCommand('jar', ['xf', jarPath, classPath], { cwd: temp });
     const classFile = path.join(temp, classPath);
     await writeFile(classFile, patchDigitalJvmClass(await readFile(classFile)));
     await runCommand('jar', ['uf', jarPath, classPath], { cwd: temp });
+
+    // 2. Source patch: compile the XStream classes with CheerpJ fallbacks.
+    //    CheerpJ 4.3 can throw ArrayIndexOutOfBoundsException from reflective
+    //    instantiation (Class.newInstance) while Digital deserializes a
+    //    circuit's ROMManagerFile on the AWT EDT — this breaks every .dig
+    //    that carries a <romList>. The replacements catch that failure and
+    //    fall back to direct constructors / degraded lookups.
+    const sources = [
+      path.join(patchesDir, 'com', 'thoughtworks', 'xstream', 'converters', 'collections', 'AbstractCollectionConverter.java'),
+      path.join(patchesDir, 'com', 'thoughtworks', 'xstream', 'core', 'util', 'SerializationMembers.java'),
+    ];
+    const outDir = path.join(temp, 'patched');
+    await mkdir(outDir, { recursive: true });
+    await runCommand('javac', ['--release', '8', '-Xlint:-options', '-nowarn', '-cp', jarPath, '-d', outDir, ...sources]);
+    await runCommand('jar', ['uf', jarPath, '-C', outDir, 'com']);
   } finally {
     await rm(temp, { recursive: true, force: true });
   }
@@ -82,7 +99,7 @@ await mkdir(digitalTarget, { recursive: true });
 for (const name of await readdir(digitalSource)) {
   if (name.endsWith('.jar')) await cp(path.join(digitalSource, name), path.join(digitalTarget, name));
 }
-await patchDigitalJar(path.join(digitalTarget, 'Digital.jar'));
+await patchDigitalJar(path.join(digitalTarget, 'Digital.jar'), path.join(root, 'patches', 'xstream'));
 
 await writeFile(path.join(dist, '.nojekyll'), '');
 console.log(`Built dist/ — ${site.length} problems, ${site.filter((p) => p.pdf).length} statements, ${site.filter((p) => p.dig).length} solutions, ${site.filter((p) => p.hasNote).length} notes, Digital runtime bundled.`);
