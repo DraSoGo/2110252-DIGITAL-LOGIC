@@ -33,7 +33,15 @@ test('problem heading is visible and resource tabs stay compact at the left', as
   await page.setViewportSize({ width: 1366, height: 768 });
   await page.goto('/#/problem/simulation%2Flab-01%2F01');
 
-  await expect(page.getByRole('heading', { level: 1, name: '01' })).toBeVisible();
+  // Problem titles come from metadata.json (statement headings) and may be
+  // renamed at any time — read the live title from the manifest instead of
+  // hard-coding it here.
+  const expectedTitle = await page.evaluate(async () => {
+    const response = await fetch(new URL('data/site.json', document.baseURI));
+    const problems = await response.json();
+    return problems.find((problem) => problem.id === 'simulation/lab-01/01').title;
+  });
+  await expect(page.getByRole('heading', { level: 1, name: expectedTitle })).toBeVisible();
   const layout = await page.evaluate(() => {
     const bar = document.querySelector('.tab-bar').getBoundingClientRect();
     const tabs = [...document.querySelectorAll('.tab-bar [role="tab"]')]
