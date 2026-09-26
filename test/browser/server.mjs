@@ -54,7 +54,36 @@ const server = http.createServer(async (request, response) => {
     response.writeHead(404).end('dist is not built');
     return;
   }
-  response.writeHead(200, { 'content-type': mime.get(path.extname(file)) || 'application/octet-stream' });
+  const fileSize = (await stat(file)).size;
+  const contentType = mime.get(path.extname(file)) || 'application/octet-stream';
+  const range = request.headers.range?.match(/^bytes=(\d*)-(\d*)$/);
+  if (request.headers.range && !range) {
+    response.writeHead(416, { 'content-range': `bytes */${fileSize}` }).end();
+    return;
+  }
+  if (range) {
+    const suffixLength = range[1] === '' ? Number(range[2]) : null;
+    const start = suffixLength === null ? Number(range[1]) : Math.max(0, fileSize - suffixLength);
+    const requestedEnd = range[2] === '' || suffixLength !== null ? fileSize - 1 : Number(range[2]);
+    const end = Math.min(requestedEnd, fileSize - 1);
+    if (!Number.isInteger(start) || !Number.isInteger(end) || start > end || start >= fileSize) {
+      response.writeHead(416, { 'content-range': `bytes */${fileSize}` }).end();
+      return;
+    }
+    response.writeHead(206, {
+      'accept-ranges': 'bytes',
+      'content-range': `bytes ${start}-${end}/${fileSize}`,
+      'content-length': end - start + 1,
+      'content-type': contentType,
+    });
+    createReadStream(file, { start, end }).pipe(response);
+    return;
+  }
+  response.writeHead(200, {
+    'accept-ranges': 'bytes',
+    'content-length': fileSize,
+    'content-type': contentType,
+  });
   createReadStream(file).pipe(response);
 });
 
