@@ -25,7 +25,8 @@ test('compact tabs are at most 40 pixels tall on desktop', async ({ page }) => {
   await page.setViewportSize({ width: 1366, height: 768 });
   await page.goto('/#/problem/simulation%2Flab-01%2F01');
   await expect(page.locator('.tab-bar')).toBeVisible();
-  await expect(page.locator('.tab-bar')).toHaveJSProperty('clientHeight', 40);
+  const height = await page.locator('.tab-bar').evaluate((element) => element.clientHeight);
+  expect(height).toBeLessThanOrEqual(40);
 });
 
 test('interactive page keeps a source-download fallback when CheerpJ cannot load', async ({ page }) => {
