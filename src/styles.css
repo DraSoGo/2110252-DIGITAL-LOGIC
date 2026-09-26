@@ -595,32 +595,44 @@ kbd {
   padding: 14px clamp(16px, 3vw, 34px) 14px;
 }
 
-.problem-title {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
+.problem-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 2px 2px 14px;
+  flex-shrink: 0;
+}
+
+.problem-heading-copy {
+  min-width: 0;
+}
+
+.problem-path {
+  display: block;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  color: var(--cyan);
+  font: 9px var(--mono);
+  letter-spacing: 0.06em;
+  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.problem-title {
+  margin: 6px 0 0;
+  color: var(--text);
+  font: 700 clamp(34px, 4vw, 52px) / 0.92 var(--mono);
+  letter-spacing: -0.055em;
 }
 
 .problem-meta {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-height: 32px;
-  padding: 0 2px 10px;
+  padding: 0 0 2px;
   color: var(--muted);
   font: 10px var(--mono);
   letter-spacing: 0.06em;
-}
-
-.problem-meta code {
-  color: var(--cyan);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .meta-dot {
@@ -910,15 +922,14 @@ kbd {
 .tab-bar {
   display: flex;
   gap: 0;
-  margin-top: 4px;
-  border: 1px solid var(--line);
-  border-bottom: 0;
-  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
   flex-shrink: 0;
 }
 
 .tab-bar button {
-  flex: 1;
+  flex: 0 0 auto;
+  min-width: 156px;
   display: grid;
   grid-template-columns: 18px auto auto;
   align-items: center;
@@ -926,16 +937,12 @@ kbd {
   padding: 0 12px;
   height: 36px;
   border: 0;
-  border-right: 1px solid var(--line);
+  border-right: 0;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
   font: inherit;
   text-align: left;
-}
-
-.tab-bar button:last-child {
-  border-right: 0;
 }
 
 .tab-bar button svg {
@@ -1486,7 +1493,17 @@ kbd {
   .problem-view {
     padding: 10px 12px;
   }
+  .problem-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+  .problem-title {
+    font-size: 34px;
+  }
   .problem-meta {
+    align-self: stretch;
     flex-wrap: wrap;
     gap: 8px;
   }
@@ -1513,6 +1530,7 @@ kbd {
   }
   .tab-bar button {
     flex: 0 0 auto;
+    min-width: 128px;
     padding: 0 12px;
   }
   .tab-bar button small {
@@ -1633,6 +1651,10 @@ kbd {
   padding: 28px;
   text-align: center;
   background: var(--bg);
+}
+
+.interactive-fallback[hidden] {
+  display: none;
 }
 
 .interactive-fallback code { color: var(--red); font: 10px var(--mono); }

@@ -1,9 +1,11 @@
 import { spawn } from 'node:child_process';
-import { cp, mkdir, readdir, rm, stat, writeFile } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildSiteRecords, scanContent } from './lib/manifest.mjs';
 import { copyContentTree } from './lib/dist-copy.mjs';
+import { patchDigitalJvmClass } from './lib/digital-patch.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(root, 'dist');
@@ -14,6 +16,29 @@ function run(script) {
     child.on('error', reject);
     child.on('exit', (code) => (code === 0 ? resolve() : reject(new Error(`${script} exited with ${code}`))));
   });
+}
+
+function runCommand(command, args, options = {}) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, { stdio: 'inherit', ...options });
+    child.on('error', reject);
+    child.on('exit', (code) => (code === 0
+      ? resolve()
+      : reject(new Error(`${command} exited with ${code}`))));
+  });
+}
+
+async function patchDigitalJar(jarPath) {
+  const classPath = path.join('com', 'thoughtworks', 'xstream', 'core', 'JVM.class');
+  const temp = await mkdtemp(path.join(os.tmpdir(), 'diglo-digital-patch-'));
+  try {
+    await runCommand('jar', ['xf', jarPath, classPath], { cwd: temp });
+    const classFile = path.join(temp, classPath);
+    await writeFile(classFile, patchDigitalJvmClass(await readFile(classFile)));
+    await runCommand('jar', ['uf', jarPath, classPath], { cwd: temp });
+  } finally {
+    await rm(temp, { recursive: true, force: true });
+  }
 }
 
 await run('render-svg.mjs');
@@ -57,6 +82,7 @@ await mkdir(digitalTarget, { recursive: true });
 for (const name of await readdir(digitalSource)) {
   if (name.endsWith('.jar')) await cp(path.join(digitalSource, name), path.join(digitalTarget, name));
 }
+await patchDigitalJar(path.join(digitalTarget, 'Digital.jar'));
 
 await writeFile(path.join(dist, '.nojekyll'), '');
 console.log(`Built dist/ — ${site.length} problems, ${site.filter((p) => p.pdf).length} statements, ${site.filter((p) => p.dig).length} solutions, ${site.filter((p) => p.hasNote).length} notes, Digital runtime bundled.`);

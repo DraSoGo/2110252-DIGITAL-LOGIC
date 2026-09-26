@@ -234,13 +234,17 @@ function problemMarkup(p) {
   const previous = index > 0 ? ordered[index - 1] : null;
   const next = index >= 0 && index < ordered.length - 1 ? ordered[index + 1] : null;
   return `<div class="problem-view view-enter">
-    <h1 class="problem-title">${escapeHtml(p.title)}</h1>
-    <div class="problem-meta">
-      <code>${escapeHtml(p.id)}</code>
-      <span class="meta-dot ${p.pdf ? 'ready' : ''}" title="PDF statement ${p.pdf ? 'available' : 'missing'}">PDF</span>
-      <span class="meta-dot ${p.dig ? 'ready' : ''}" title=".dig solution ${p.dig ? 'available' : 'missing'}">DIG</span>
-      <span class="meta-dot ${p.hasNote ? 'ready' : ''}" title="Scratch note ${p.hasNote ? 'available' : 'missing'}">NOTE</span>
-    </div>
+    <header class="problem-heading">
+      <div class="problem-heading-copy">
+        <code class="problem-path">${escapeHtml(p.id)}</code>
+        <h1 class="problem-title">${escapeHtml(p.title)}</h1>
+      </div>
+      <div class="problem-meta">
+        <span class="meta-dot ${p.pdf ? 'ready' : ''}" title="PDF statement ${p.pdf ? 'available' : 'missing'}">PDF</span>
+        <span class="meta-dot ${p.dig ? 'ready' : ''}" title=".dig solution ${p.dig ? 'available' : 'missing'}">DIG</span>
+        <span class="meta-dot ${p.hasNote ? 'ready' : ''}" title="Scratch note ${p.hasNote ? 'available' : 'missing'}">NOTE</span>
+      </div>
+    </header>
     <div class="tab-bar" role="tablist" aria-label="Problem resources">
       ${TABS.map((tab) => {
         const available = isTabAvailable(tab.id, p);
