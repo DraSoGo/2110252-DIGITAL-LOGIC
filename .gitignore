@@ -10,3 +10,6 @@ desktop.ini
 .agent-spec.md
 .playwright-mcp/
 .worktrees/
+docs/superpowers/
+test-results/
+playwright-report/

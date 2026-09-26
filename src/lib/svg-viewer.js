@@ -76,8 +76,15 @@ export function createSvgViewer(container) {
 
   function measureSvg() {
     if (!svgEl) return;
-    // Prefer SVG's intrinsic size; fall back to viewBox.
+    const { width, height } = svgEl.viewBox.baseVal;
+    if (width > 0 && height > 0) {
+      baseSize = { width, height };
+      return;
+    }
+    const previous = stage.style.transform;
+    stage.style.transform = 'none';
     const rect = svgEl.getBoundingClientRect();
+    stage.style.transform = previous;
     baseSize = { width: rect.width, height: rect.height };
   }
 
