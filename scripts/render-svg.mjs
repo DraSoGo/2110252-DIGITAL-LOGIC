@@ -55,7 +55,10 @@ for (const problem of problems) {
   const [sourceStat, outputStat] = await Promise.all([stat(source), stat(output).catch(() => null)]);
   if (!force && outputStat && outputStat.mtimeMs >= sourceStat.mtimeMs) { skipped++; continue; }
   try {
-    await runJava(['-dig', source, '-svg', output]);
+    // -ieee renders ANSI/IEEE gate shapes (AND curved back, OR curved front,
+    // NOT triangle + bubble) matching the Digital app's default look, instead
+    // of rectangular DIN boxes labelled "&" / "≥1".
+    await runJava(['-dig', source, '-svg', output, '-ieee']);
     rendered++;
   } catch (error) {
     failures.push(`${problem.id}: ${error.message}`);
