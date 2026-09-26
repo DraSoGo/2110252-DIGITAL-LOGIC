@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { cp, mkdir, rm, stat, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildSiteRecords, scanContent } from './lib/manifest.mjs';
@@ -48,5 +48,15 @@ if (await stat(path.join(root, 'content')).catch(() => null)) {
   await copyContentTree(path.join(root, 'content'), path.join(dist, 'content'));
 }
 
+const digitalSource = path.join(root, 'tools', 'Digital');
+const digitalTarget = path.join(dist, 'vendor', 'digital');
+if (!(await stat(path.join(digitalSource, 'Digital.jar')).catch(() => null))) {
+  throw new Error('Digital runtime missing. Run npm run tools before npm run build.');
+}
+await mkdir(digitalTarget, { recursive: true });
+for (const name of await readdir(digitalSource)) {
+  if (name.endsWith('.jar')) await cp(path.join(digitalSource, name), path.join(digitalTarget, name));
+}
+
 await writeFile(path.join(dist, '.nojekyll'), '');
-console.log(`Built dist/ — ${site.length} problems, ${site.filter((p) => p.pdf).length} statements, ${site.filter((p) => p.dig).length} solutions, ${site.filter((p) => p.hasNote).length} notes.`);
+console.log(`Built dist/ — ${site.length} problems, ${site.filter((p) => p.pdf).length} statements, ${site.filter((p) => p.dig).length} solutions, ${site.filter((p) => p.hasNote).length} notes, Digital runtime bundled.`);

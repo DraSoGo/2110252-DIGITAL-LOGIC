@@ -585,6 +585,8 @@ kbd {
    min-height (not height) lets #main scroll when short screens force the
    viewer minimum heights taller than the available space. */
 .problem-view {
+  width: min(100%, 1120px);
+  margin: 0 auto;
   height: 100%;
   min-height: 0;
   min-width: 0;
@@ -920,9 +922,9 @@ kbd {
   display: grid;
   grid-template-columns: 18px auto auto;
   align-items: center;
-  gap: 10px;
-  padding: 0 16px;
-  height: 40px;
+  gap: 8px;
+  padding: 0 12px;
+  height: 36px;
   border: 0;
   border-right: 1px solid var(--line);
   background: transparent;
@@ -941,7 +943,7 @@ kbd {
 }
 
 .tab-bar button span {
-  font: 600 11px var(--mono);
+  font: 600 10px var(--mono);
   letter-spacing: 0.1em;
 }
 
@@ -987,8 +989,8 @@ kbd {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  min-height: 36px;
-  padding: 2px 12px;
+  min-height: 32px;
+  padding: 0 10px;
   border-bottom: 1px solid var(--line);
   background: var(--panel-2);
   flex-shrink: 0;
@@ -1028,8 +1030,8 @@ kbd {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 32px;
-  padding: 4px 10px;
+  min-height: 28px;
+  padding: 3px 8px;
   border: 1px solid var(--line-2);
   background: transparent;
   color: var(--muted);
@@ -1142,7 +1144,7 @@ kbd {
 
 .svg-card {
   display: inline-block;
-  padding: 18px;
+  padding: 12px;
   background: #ffffff;
   border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
