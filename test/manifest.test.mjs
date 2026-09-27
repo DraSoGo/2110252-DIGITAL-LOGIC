@@ -356,15 +356,15 @@ test('group with mixed direct problems and child groups works', async () => {
 
 /* ---------- Baseline comparison (real repository) ---------- */
 
-test('migrated repository preserves baseline problem and resource counts', async () => {
+test('migrated repository does not drop baseline problem and resource counts', async () => {
   const baseline = JSON.parse(await readFile(path.join(repoRoot, 'test', 'fixtures', 'baseline.json'), 'utf8'));
   const current = await scanOk(repoRoot);
   const count = (list, key) => list.filter((item) => item[key]).length;
-  assert.equal(current.length, baseline.length, 'problem count must match baseline');
-  assert.equal(count(current, 'pdf'), count(baseline, 'pdf'), 'statement count must match baseline');
-  assert.equal(count(current, 'dig'), count(baseline, 'dig'), 'solution count must match baseline');
-  assert.equal(count(current, 'ods'), count(baseline, 'ods'), 'ods count must match baseline');
-  assert.equal(count(current, 'csv'), count(baseline, 'csv'), 'csv count must match baseline');
+  assert.ok(current.length >= baseline.length, 'problem count must not fall below baseline');
+  assert.ok(count(current, 'pdf') >= count(baseline, 'pdf'), 'statement count must not fall below baseline');
+  assert.ok(count(current, 'dig') >= count(baseline, 'dig'), 'solution count must not fall below baseline');
+  assert.ok(count(current, 'ods') >= count(baseline, 'ods'), 'ods count must not fall below baseline');
+  assert.ok(count(current, 'csv') >= count(baseline, 'csv'), 'csv count must not fall below baseline');
 });
 
 test('every baseline problem id resolves via alias in the migrated tree', async () => {

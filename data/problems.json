@@ -500,5 +500,95 @@
     "ods": "content/simulation/lab-04/02/note.ods",
     "csv": null,
     "hasNote": true
+  },
+  {
+    "id": "simulation/lab-05/01",
+    "aliases": [
+      "Simulation/Lab_05/01"
+    ],
+    "title": "Simple Memory",
+    "kind": "lab",
+    "order": 1,
+    "groupPath": [
+      "Simulation",
+      "Lab_05"
+    ],
+    "pdf": "content/simulation/lab-05/01/statement.pdf",
+    "dig": "content/simulation/lab-05/01/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "simulation/lab-05/02",
+    "aliases": [
+      "Simulation/Lab_05/02"
+    ],
+    "title": "RS Latch (NOR)",
+    "kind": "lab",
+    "order": 2,
+    "groupPath": [
+      "Simulation",
+      "Lab_05"
+    ],
+    "pdf": "content/simulation/lab-05/02/statement.pdf",
+    "dig": "content/simulation/lab-05/02/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "simulation/lab-05/03",
+    "aliases": [
+      "Simulation/Lab_05/03"
+    ],
+    "title": "Master-Slave JK Flip-flop",
+    "kind": "lab",
+    "order": 3,
+    "groupPath": [
+      "Simulation",
+      "Lab_05"
+    ],
+    "pdf": "content/simulation/lab-05/03/statement.pdf",
+    "dig": "content/simulation/lab-05/03/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "simulation/lab-05/04",
+    "aliases": [
+      "Simulation/Lab_05/04"
+    ],
+    "title": "Positive Edge Trigger D Flip-flop",
+    "kind": "lab",
+    "order": 4,
+    "groupPath": [
+      "Simulation",
+      "Lab_05"
+    ],
+    "pdf": "content/simulation/lab-05/04/statement.pdf",
+    "dig": "content/simulation/lab-05/04/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "simulation/lab-05/05",
+    "aliases": [
+      "Simulation/Lab_05/05"
+    ],
+    "title": "Positive Edge Trigger T Flip flop",
+    "kind": "lab",
+    "order": 5,
+    "groupPath": [
+      "Simulation",
+      "Lab_05"
+    ],
+    "pdf": "content/simulation/lab-05/05/statement.pdf",
+    "dig": "content/simulation/lab-05/05/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
   }
 ]
