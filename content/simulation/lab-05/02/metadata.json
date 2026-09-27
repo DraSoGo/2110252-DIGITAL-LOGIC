@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-05/02",
+  "aliases": [
+    "Simulation/Lab_05/02"
+  ],
+  "title": "RS Latch (NOR)",
+  "order": 2,
+  "kind": "lab"
+}

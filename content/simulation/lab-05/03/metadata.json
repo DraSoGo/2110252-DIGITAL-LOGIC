@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-05/03",
+  "aliases": [
+    "Simulation/Lab_05/03"
+  ],
+  "title": "Master-Slave JK Flip-flop",
+  "order": 3,
+  "kind": "lab"
+}

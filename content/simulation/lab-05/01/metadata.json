@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-05/01",
+  "aliases": [
+    "Simulation/Lab_05/01"
+  ],
+  "title": "Simple Memory",
+  "order": 1,
+  "kind": "lab"
+}

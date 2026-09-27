@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-05/04",
+  "aliases": [
+    "Simulation/Lab_05/04"
+  ],
+  "title": "Positive Edge Trigger D Flip-flop",
+  "order": 4,
+  "kind": "lab"
+}
