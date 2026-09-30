@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<circuit>
+  <version>2</version>
+  <attributes/>
+  <visualElements>
+<visualElement><elementName>In</elementName><elementAttributes><entry><string>Label</string><string>A</string></entry><entry><string>Bits</string><int>8</int></entry></elementAttributes><pos x="0" y="0"/></visualElement>
+<visualElement><elementName>In</elementName><elementAttributes><entry><string>Label</string><string>B</string></entry><entry><string>Bits</string><int>8</int></entry></elementAttributes><pos x="0" y="80"/></visualElement>
+<visualElement><elementName>In</elementName><elementAttributes><entry><string>Label</string><string>start</string></entry></elementAttributes><pos x="0" y="160"/></visualElement>
+<visualElement><elementName>In</elementName><elementAttributes><entry><string>Label</string><string>reset</string></entry></elementAttributes><pos x="0" y="240"/></visualElement>
+<visualElement><elementName>Clock</elementName><elementAttributes><entry><string>Label</string><string>clock</string></entry><entry><string>runRealTime</string><boolean>true</boolean></entry></elementAttributes><pos x="0" y="320"/></visualElement>
+<visualElement><elementName>Out</elementName><elementAttributes><entry><string>Label</string><string>gcd</string></entry><entry><string>Bits</string><int>8</int></entry></elementAttributes><pos x="400" y="0"/></visualElement>
+<visualElement><elementName>Out</elementName><elementAttributes><entry><string>Label</string><string>busy</string></entry></elementAttributes><pos x="400" y="80"/></visualElement>
+<visualElement><elementName>Testcase</elementName><elementAttributes><entry><string>Label</string><string>T01</string></entry><entry><string>Testdata</string><testData><dataString>A B start reset clock gcd busy
+0 0 0 1 0 x x
+0 0 0 1 1 0 0
+12 12 1 0 0 x x
+12 12 1 0 1 x 1
+repeat(600) 12 12 0 0 C x x
+12 12 0 0 0 12 0
+12 12 0 0 1 12 0
+12 12 0 0 0 12 0
+12 12 0 0 1 12 0
+200 200 1 0 0 x x
+200 200 1 0 1 x 1
+repeat(600) 200 200 0 0 C x x
+200 200 0 0 0 200 0
+200 200 0 0 1 200 0
+200 200 0 0 0 200 0
+200 200 0 0 1 200 0
+1 1 1 0 0 x x
+1 1 1 0 1 x 1
+repeat(600) 1 1 0 0 C x x
+1 1 0 0 0 1 0
+1 1 0 0 1 1 0
+1 1 0 0 0 1 0
+1 1 0 0 1 1 0
+</dataString></testData></entry></elementAttributes><pos x="-300" y="0"/></visualElement>
+<visualElement><elementName>Testcase</elementName><elementAttributes><entry><string>Label</string><string>T02</string></entry><entry><string>Testdata</string><testData><dataString>A B start reset clock gcd busy
+0 0 0 1 0 x x
+0 0 0 1 1 0 0
+48 12 1 0 0 x x
+48 12 1 0 1 x 1
+repeat(600) 48 12 0 0 C x x
+48 12 0 0 0 12 0
+48 12 0 0 1 12 0
+48 12 0 0 0 12 0
+48 12 0 0 1 12 0
+255 5 1 0 0 x x
+255 5 1 0 1 x 1
+repeat(600) 255 5 0 0 C x x
+255 5 0 0 0 5 0
+255 5 0 0 1 5 0
+255 5 0 0 0 5 0
+255 5 0 0 1 5 0
+128 2 1 0 0 x x
+128 2 1 0 1 x 1
+repeat(600) 128 2 0 0 C x x
+128 2 0 0 0 2 0
+128 2 0 0 1 2 0
+128 2 0 0 0 2 0
+128 2 0 0 1 2 0
+</dataString></testData></entry></elementAttributes><pos x="-420" y="0"/></visualElement>
+<visualElement><elementName>Testcase</elementName><elementAttributes><entry><string>Label</string><string>T05</string></entry><entry><string>Testdata</string><testData><dataString>A B start reset clock gcd busy
+0 0 0 1 0 x x
+0 0 0 1 1 0 0
+84 36 1 0 0 x x
+84 36 1 0 1 x 1
+repeat(600) 84 36 0 0 C x x
+84 36 0 0 0 12 0
+84 36 0 0 1 12 0
+84 36 0 0 0 12 0
+84 36 0 0 1 12 0
+36 84 1 0 0 x x
+36 84 1 0 1 x 1
+repeat(600) 36 84 0 0 C x x
+36 84 0 0 0 12 0
+36 84 0 0 1 12 0
+36 84 0 0 0 12 0
+36 84 0 0 1 12 0
+120 75 1 0 0 x x
+120 75 1 0 1 x 1
+repeat(600) 120 75 0 0 C x x
+120 75 0 0 0 15 0
+120 75 0 0 1 15 0
+120 75 0 0 0 15 0
+120 75 0 0 1 15 0
+</dataString></testData></entry></elementAttributes><pos x="-540" y="0"/></visualElement>
+<visualElement><elementName>Testcase</elementName><elementAttributes><entry><string>Label</string><string>T06</string></entry><entry><string>Testdata</string><testData><dataString>A B start reset clock gcd busy
+0 0 0 1 0 x x
+0 0 0 1 1 0 0
+1 200 1 0 0 x x
+1 200 1 0 1 x 1
+repeat(600) 1 200 0 0 C x x
+1 200 0 0 0 1 0
+1 200 0 0 1 1 0
+1 200 0 0 0 1 0
+1 200 0 0 1 1 0
+200 1 1 0 0 x x
+200 1 1 0 1 x 1
+repeat(600) 200 1 0 0 C x x
+200 1 0 0 0 1 0
+200 1 0 0 1 1 0
+200 1 0 0 0 1 0
+200 1 0 0 1 1 0
+2 1 1 0 0 x x
+2 1 1 0 1 x 1
+repeat(600) 2 1 0 0 C x x
+2 1 0 0 0 1 0
+2 1 0 0 1 1 0
+2 1 0 0 0 1 0
+2 1 0 0 1 1 0
+</dataString></testData></entry></elementAttributes><pos x="-660" y="0"/></visualElement>
+<visualElement><elementName>Testcase</elementName><elementAttributes><entry><string>Label</string><string>T07</string></entry><entry><string>Testdata</string><testData><dataString>A B start reset clock gcd busy
+0 0 0 1 0 x x
+0 0 0 1 1 0 0
+255 1 1 0 0 x x
+255 1 1 0 1 x 1
+repeat(600) 255 1 0 0 C x x
+255 1 0 0 0 1 0
+255 1 0 0 1 1 0
+255 1 0 0 0 1 0
+255 1 0 0 1 1 0
+1 255 1 0 0 x x
+1 255 1 0 1 x 1
+repeat(600) 1 255 0 0 C x x
+1 255 0 0 0 1 0
+1 255 0 0 1 1 0
+1 255 0 0 0 1 0
+1 255 0 0 1 1 0
+255 254 1 0 0 x x
+255 254 1 0 1 x 1
+repeat(600) 255 254 0 0 C x x
+255 254 0 0 0 1 0
+255 254 0 0 1 1 0
+255 254 0 0 0 1 0
+255 254 0 0 1 1 0
+254 255 1 0 0 x x
+254 255 1 0 1 x 1
+repeat(600) 254 255 0 0 C x x
+254 255 0 0 0 1 0
+254 255 0 0 1 1 0
+254 255 0 0 0 1 0
+254 255 0 0 1 1 0
+</dataString></testData></entry></elementAttributes><pos x="-780" y="0"/></visualElement>
+<visualElement><elementName>Testcase</elementName><elementAttributes><entry><string>Label</string><string>T09</string></entry><entry><string>Testdata</string><testData><dataString>A B start reset clock gcd busy
+0 0 0 1 0 x x
+0 0 0 1 1 0 0
+84 36 1 0 0 x x
+84 36 1 0 1 x 1
+repeat(600) 84 36 0 0 C x x
+84 36 0 0 0 12 0
+84 36 0 0 1 12 0
+10 3 0 0 0 12 0
+10 3 0 0 1 12 0
+10 3 0 0 0 12 0
+10 3 0 0 1 12 0
+10 3 0 0 0 12 0
+10 3 0 0 1 12 0
+10 3 0 0 0 12 0
+10 3 0 0 1 12 0
+10 3 0 0 0 12 0
+10 3 0 0 1 12 0
+10 3 0 0 0 12 0
+10 3 0 0 1 12 0
+45 60 1 0 0 x x
+45 60 1 0 1 x 1
+repeat(600) 45 60 0 0 C x x
+45 60 0 0 0 15 0
+45 60 0 0 1 15 0
+99 1 0 0 0 15 0
+99 1 0 0 1 15 0
+99 1 0 0 0 15 0
+99 1 0 0 1 15 0
+99 1 0 0 0 15 0
+99 1 0 0 1 15 0
+99 1 0 0 0 15 0
+99 1 0 0 1 15 0
+99 1 0 0 0 15 0
+99 1 0 0 1 15 0
+99 1 0 0 0 15 0
+99 1 0 0 1 15 0
+121 11 1 0 0 x x
+121 11 1 0 1 x 1
+repeat(600) 121 11 0 0 C x x
+121 11 0 0 0 11 0
+121 11 0 0 1 11 0
+7 7 0 0 0 11 0
+7 7 0 0 1 11 0
+7 7 0 0 0 11 0
+7 7 0 0 1 11 0
+7 7 0 0 0 11 0
+7 7 0 0 1 11 0
+7 7 0 0 0 11 0
+7 7 0 0 1 11 0
+7 7 0 0 0 11 0
+7 7 0 0 1 11 0
+7 7 0 0 0 11 0
+7 7 0 0 1 11 0
+</dataString></testData></entry></elementAttributes><pos x="-900" y="0"/></visualElement>
+<visualElement><elementName>Testcase</elementName><elementAttributes><entry><string>Label</string><string>T11</string></entry><entry><string>Testdata</string><testData><dataString>A B start reset clock gcd busy
+0 0 0 1 0 x x
+0 0 0 1 1 0 0
+255 1 1 0 0 x x
+255 1 1 0 1 x 1
+repeat(20) 255 1 0 0 C x x
+255 1 0 1 0 x x
+255 1 0 1 1 0 0
+255 1 0 0 0 0 0
+255 1 0 0 1 0 0
+255 1 0 0 0 0 0
+255 1 0 0 1 0 0
+255 1 0 0 0 0 0
+255 1 0 0 1 0 0
+18 24 1 0 0 x x
+18 24 1 0 1 x 1
+repeat(600) 18 24 0 0 C x x
+18 24 0 0 0 6 0
+18 24 0 0 1 6 0
+18 24 0 0 0 6 0
+18 24 0 0 1 6 0
+18 24 0 1 0 x x
+18 24 0 1 1 0 0
+18 24 0 1 0 x x
+18 24 0 1 1 0 0
+18 24 0 0 0 0 0
+18 24 0 0 1 0 0
+18 24 0 0 0 0 0
+18 24 0 0 1 0 0
+100 75 1 0 0 x x
+100 75 1 0 1 x 1
+repeat(600) 100 75 0 0 C x x
+100 75 0 0 0 25 0
+100 75 0 0 1 25 0
+100 75 0 0 0 25 0
+100 75 0 0 1 25 0
+</dataString></testData></entry></elementAttributes><pos x="-1020" y="0"/></visualElement>
+  </visualElements>
+  <wires>
+
+  </wires>
+  <measurementOrdering/>
+</circuit>

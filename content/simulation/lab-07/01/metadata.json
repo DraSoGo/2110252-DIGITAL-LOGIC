@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-07/01",
+  "aliases": ["Simulation/Lab_07/01"],
+  "title": "GCD (Greatest Common Divisor)",
+  "order": 1,
+  "kind": "lab"
+}

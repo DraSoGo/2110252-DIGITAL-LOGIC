@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-06/03",
+  "aliases": ["Simulation/Lab_06/03"],
+  "title": "Vending Machine (Mealy Machine)",
+  "order": 3,
+  "kind": "lab"
+}

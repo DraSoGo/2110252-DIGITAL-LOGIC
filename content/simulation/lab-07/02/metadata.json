@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-07/02",
+  "aliases": ["Simulation/Lab_07/02"],
+  "title": "Counting Increasing Values",
+  "order": 2,
+  "kind": "lab"
+}

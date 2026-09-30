@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "simulation/lab-06/04",
+  "aliases": ["Simulation/Lab_06/04"],
+  "title": "Vending Machine (Moore Machine)",
+  "order": 4,
+  "kind": "lab"
+}

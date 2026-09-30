@@ -590,5 +590,113 @@
     "ods": null,
     "csv": null,
     "hasNote": false
+  },
+  {
+    "id": "simulation/lab-06/01",
+    "aliases": [
+      "Simulation/Lab_06/01"
+    ],
+    "title": "Simple Counter",
+    "kind": "lab",
+    "order": 1,
+    "groupPath": [
+      "Simulation",
+      "Lab_06"
+    ],
+    "pdf": "content/simulation/lab-06/01/statement.pdf",
+    "dig": "content/simulation/lab-06/01/solution.dig",
+    "ods": "content/simulation/lab-06/01/note.ods",
+    "csv": null,
+    "hasNote": true
+  },
+  {
+    "id": "simulation/lab-06/02",
+    "aliases": [
+      "Simulation/Lab_06/02"
+    ],
+    "title": "Counter (Quiz 2, Problem 1)",
+    "kind": "lab",
+    "order": 2,
+    "groupPath": [
+      "Simulation",
+      "Lab_06"
+    ],
+    "pdf": "content/simulation/lab-06/02/statement.pdf",
+    "dig": "content/simulation/lab-06/02/solution.dig",
+    "ods": "content/simulation/lab-06/02/note.ods",
+    "csv": null,
+    "hasNote": true
+  },
+  {
+    "id": "simulation/lab-06/03",
+    "aliases": [
+      "Simulation/Lab_06/03"
+    ],
+    "title": "Vending Machine (Mealy Machine)",
+    "kind": "lab",
+    "order": 3,
+    "groupPath": [
+      "Simulation",
+      "Lab_06"
+    ],
+    "pdf": "content/simulation/lab-06/03/statement.pdf",
+    "dig": "content/simulation/lab-06/03/solution.dig",
+    "ods": "content/simulation/lab-06/03/note.ods",
+    "csv": null,
+    "hasNote": true
+  },
+  {
+    "id": "simulation/lab-06/04",
+    "aliases": [
+      "Simulation/Lab_06/04"
+    ],
+    "title": "Vending Machine (Moore Machine)",
+    "kind": "lab",
+    "order": 4,
+    "groupPath": [
+      "Simulation",
+      "Lab_06"
+    ],
+    "pdf": "content/simulation/lab-06/04/statement.pdf",
+    "dig": "content/simulation/lab-06/04/solution.dig",
+    "ods": "content/simulation/lab-06/04/note.ods",
+    "csv": null,
+    "hasNote": true
+  },
+  {
+    "id": "simulation/lab-07/01",
+    "aliases": [
+      "Simulation/Lab_07/01"
+    ],
+    "title": "GCD (Greatest Common Divisor)",
+    "kind": "lab",
+    "order": 1,
+    "groupPath": [
+      "Simulation",
+      "Lab_07"
+    ],
+    "pdf": "content/simulation/lab-07/01/statement.pdf",
+    "dig": "content/simulation/lab-07/01/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "simulation/lab-07/02",
+    "aliases": [
+      "Simulation/Lab_07/02"
+    ],
+    "title": "Counting Increasing Values",
+    "kind": "lab",
+    "order": 2,
+    "groupPath": [
+      "Simulation",
+      "Lab_07"
+    ],
+    "pdf": "content/simulation/lab-07/02/statement.pdf",
+    "dig": "content/simulation/lab-07/02/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
   }
 ]
