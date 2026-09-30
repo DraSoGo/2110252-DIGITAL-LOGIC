@@ -1,0 +1,16 @@
+dist/
+generated/
+data/site.json
+tools/
+node_modules/
+.DS_Store
+desktop.ini
+.~lock.*#
+*.log
+.agent-spec.md
+.playwright-mcp/
+.worktrees/
+docs/superpowers/
+test-results/
+playwright-report/
+*.ini
