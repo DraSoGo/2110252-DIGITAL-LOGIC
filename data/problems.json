@@ -698,5 +698,53 @@
     "ods": null,
     "csv": null,
     "hasNote": false
+  },
+  {
+    "id": "quiz/quiz1/01",
+    "aliases": [],
+    "title": "01",
+    "kind": "quiz",
+    "order": 1,
+    "groupPath": [
+      "Quiz",
+      "Quiz1"
+    ],
+    "pdf": "content/quiz/quiz1/01/statement.pdf",
+    "dig": "content/quiz/quiz1/01/solution.dig",
+    "ods": null,
+    "csv": "content/quiz/quiz1/01/note.csv",
+    "hasNote": true
+  },
+  {
+    "id": "quiz/quiz1/02",
+    "aliases": [],
+    "title": "02",
+    "kind": "quiz",
+    "order": 2,
+    "groupPath": [
+      "Quiz",
+      "Quiz1"
+    ],
+    "pdf": "content/quiz/quiz1/02/statement.pdf",
+    "dig": "content/quiz/quiz1/02/solution.dig",
+    "ods": null,
+    "csv": "content/quiz/quiz1/02/note.csv",
+    "hasNote": true
+  },
+  {
+    "id": "quiz/quiz1/03",
+    "aliases": [],
+    "title": "03",
+    "kind": "quiz",
+    "order": 3,
+    "groupPath": [
+      "Quiz",
+      "Quiz1"
+    ],
+    "pdf": "content/quiz/quiz1/03/statement.pdf",
+    "dig": "content/quiz/quiz1/03/solution.dig",
+    "ods": null,
+    "csv": "content/quiz/quiz1/03/note.csv",
+    "hasNote": true
   }
 ]
