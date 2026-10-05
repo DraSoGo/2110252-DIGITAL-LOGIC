@@ -677,9 +677,9 @@
     ],
     "pdf": "content/simulation/lab-07/01/statement.pdf",
     "dig": "content/simulation/lab-07/01/solution.dig",
-    "ods": null,
+    "ods": "content/simulation/lab-07/01/note.ods",
     "csv": null,
-    "hasNote": false
+    "hasNote": true
   },
   {
     "id": "simulation/lab-07/02",
@@ -744,7 +744,7 @@
     "pdf": "content/quiz/quiz1/03/statement.pdf",
     "dig": "content/quiz/quiz1/03/solution.dig",
     "ods": null,
-    "csv": "content/quiz/quiz1/03/note.csv",
-    "hasNote": true
+    "csv": null,
+    "hasNote": false
   }
 ]
