@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "exam-2/68/02",
+  "aliases": [
+    "Exam2/68/02"
+  ],
+  "title": "Loop-Based Sum of Even Numbers",
+  "order": 2,
+  "kind": "exam"
+}

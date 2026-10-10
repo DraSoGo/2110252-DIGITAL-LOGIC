@@ -126,6 +126,168 @@
     "hasNote": false
   },
   {
+    "id": "exam-2/66/01",
+    "aliases": [
+      "Exam2/66/01"
+    ],
+    "title": "Counter",
+    "kind": "exam",
+    "order": 1,
+    "groupPath": [
+      "Exam2",
+      "66"
+    ],
+    "pdf": "content/exam-2/66/01/statement.pdf",
+    "dig": "content/exam-2/66/01/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "exam-2/66/02",
+    "aliases": [
+      "Exam2/66/02"
+    ],
+    "title": "Square Root",
+    "kind": "exam",
+    "order": 2,
+    "groupPath": [
+      "Exam2",
+      "66"
+    ],
+    "pdf": "content/exam-2/66/02/statement.pdf",
+    "dig": null,
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "exam-2/66/03",
+    "aliases": [
+      "Exam2/66/03"
+    ],
+    "title": "Mean",
+    "kind": "exam",
+    "order": 3,
+    "groupPath": [
+      "Exam2",
+      "66"
+    ],
+    "pdf": "content/exam-2/66/03/statement.pdf",
+    "dig": null,
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "exam-2/67/01",
+    "aliases": [
+      "Exam2/67/01"
+    ],
+    "title": "Synchronous Counter with Reset and Load",
+    "kind": "exam",
+    "order": 1,
+    "groupPath": [
+      "Exam2",
+      "67"
+    ],
+    "pdf": "content/exam-2/67/01/statement.pdf",
+    "dig": "content/exam-2/67/01/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "exam-2/67/02",
+    "aliases": [
+      "Exam2/67/02"
+    ],
+    "title": "Maximum-Area Rectangle",
+    "kind": "exam",
+    "order": 2,
+    "groupPath": [
+      "Exam2",
+      "67"
+    ],
+    "pdf": "content/exam-2/67/02/statement.pdf",
+    "dig": "content/exam-2/67/02/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "exam-2/67/03",
+    "aliases": [
+      "Exam2/67/03"
+    ],
+    "title": "Increasing-Value Counter and Maximum",
+    "kind": "exam",
+    "order": 3,
+    "groupPath": [
+      "Exam2",
+      "67"
+    ],
+    "pdf": "content/exam-2/67/03/statement.pdf",
+    "dig": "content/exam-2/67/03/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "exam-2/68/01",
+    "aliases": [
+      "Exam2/68/01"
+    ],
+    "title": "Synchronous Counter with Reset and Load",
+    "kind": "exam",
+    "order": 1,
+    "groupPath": [
+      "Exam2",
+      "68"
+    ],
+    "pdf": "content/exam-2/68/01/statement.pdf",
+    "dig": "content/exam-2/68/01/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "exam-2/68/02",
+    "aliases": [
+      "Exam2/68/02"
+    ],
+    "title": "Loop-Based Sum of Even Numbers",
+    "kind": "exam",
+    "order": 2,
+    "groupPath": [
+      "Exam2",
+      "68"
+    ],
+    "pdf": "content/exam-2/68/02/statement.pdf",
+    "dig": "content/exam-2/68/02/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "exam-2/68/03",
+    "aliases": [
+      "Exam2/68/03"
+    ],
+    "title": "Divisibility Counter for 3 and 5",
+    "kind": "exam",
+    "order": 3,
+    "groupPath": [
+      "Exam2",
+      "68"
+    ],
+    "pdf": "content/exam-2/68/03/statement.pdf",
+    "dig": "content/exam-2/68/03/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
     "id": "learn/full-address-1",
     "aliases": [
       "Learn/Full_Address_1"

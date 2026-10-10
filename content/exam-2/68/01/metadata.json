@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "exam-2/68/01",
+  "aliases": [
+    "Exam2/68/01"
+  ],
+  "title": "Synchronous Counter with Reset and Load",
+  "order": 1,
+  "kind": "exam"
+}
