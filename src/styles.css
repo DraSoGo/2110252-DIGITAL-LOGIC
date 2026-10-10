@@ -525,8 +525,9 @@ kbd {
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
   border: 1px solid var(--faint);
   border-radius: 50%;
 }
