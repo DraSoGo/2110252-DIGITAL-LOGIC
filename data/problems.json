@@ -265,9 +265,9 @@
     ],
     "pdf": "content/exam-2/68/02/statement.pdf",
     "dig": "content/exam-2/68/02/solution.dig",
-    "ods": null,
+    "ods": "content/exam-2/68/02/note.ods",
     "csv": null,
-    "hasNote": false
+    "hasNote": true
   },
   {
     "id": "exam-2/68/03",
@@ -905,6 +905,54 @@
     ],
     "pdf": "content/quiz/quiz1/03/statement.pdf",
     "dig": "content/quiz/quiz1/03/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "quiz/quiz2/01",
+    "aliases": [],
+    "title": "Asynchronous-Reset Counter with Synchronous Load",
+    "kind": "quiz",
+    "order": 1,
+    "groupPath": [
+      "Quiz",
+      "Quiz2"
+    ],
+    "pdf": "content/quiz/quiz2/01/statement.pdf",
+    "dig": "content/quiz/quiz2/01/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "quiz/quiz2/02",
+    "aliases": [],
+    "title": "Loop-Based Arithmetic Series Sum",
+    "kind": "quiz",
+    "order": 2,
+    "groupPath": [
+      "Quiz",
+      "Quiz2"
+    ],
+    "pdf": "content/quiz/quiz2/02/statement.pdf",
+    "dig": "content/quiz/quiz2/02/solution.dig",
+    "ods": null,
+    "csv": null,
+    "hasNote": false
+  },
+  {
+    "id": "quiz/quiz2/03",
+    "aliases": [],
+    "title": "One-Bit and Odd-Parity Counter",
+    "kind": "quiz",
+    "order": 3,
+    "groupPath": [
+      "Quiz",
+      "Quiz2"
+    ],
+    "pdf": "content/quiz/quiz2/03/statement.pdf",
+    "dig": "content/quiz/quiz2/03/solution.dig",
     "ods": null,
     "csv": null,
     "hasNote": false
