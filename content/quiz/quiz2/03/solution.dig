@@ -612,7 +612,7 @@
     <visualElement>
       <elementName>D_FF</elementName>
       <elementAttributes/>
-      <pos x="1140" y="20"/>
+      <pos x="1180" y="20"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -626,7 +626,7 @@
           <string>clk</string>
         </entry>
       </elementAttributes>
-      <pos x="1140" y="60"/>
+      <pos x="1180" y="60"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -636,7 +636,7 @@
           <string>busy</string>
         </entry>
       </elementAttributes>
-      <pos x="1220" y="20"/>
+      <pos x="1260" y="20"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -1148,6 +1148,35 @@ N new reset clock ones odd busy
       </elementAttributes>
       <pos x="80" y="-100"/>
     </visualElement>
+    <visualElement>
+      <elementName>Multiplexer</elementName>
+      <elementAttributes/>
+      <pos x="1120" y="0"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Tunnel</elementName>
+      <elementAttributes>
+        <entry>
+          <string>rotation</string>
+          <rotation rotation="2"/>
+        </entry>
+        <entry>
+          <string>NetName</string>
+          <string>R</string>
+        </entry>
+      </elementAttributes>
+      <pos x="1140" y="60"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Const</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Value</string>
+          <long>0</long>
+        </entry>
+      </elementAttributes>
+      <pos x="1100" y="40"/>
+    </visualElement>
   </visualElements>
   <wires>
     <wire>
@@ -1161,6 +1190,10 @@ N new reset clock ones odd busy
     <wire>
       <p1 x="920" y="0"/>
       <p2 x="940" y="0"/>
+    </wire>
+    <wire>
+      <p1 x="1100" y="0"/>
+      <p2 x="1120" y="0"/>
     </wire>
     <wire>
       <p1 x="1140" y="160"/>
@@ -1209,6 +1242,10 @@ N new reset clock ones odd busy
     <wire>
       <p1 x="940" y="40"/>
       <p2 x="960" y="40"/>
+    </wire>
+    <wire>
+      <p1 x="1100" y="40"/>
+      <p2 x="1120" y="40"/>
     </wire>
     <wire>
       <p1 x="960" y="200"/>
@@ -1283,12 +1320,16 @@ N new reset clock ones odd busy
       <p2 x="1080" y="20"/>
     </wire>
     <wire>
-      <p1 x="1200" y="20"/>
-      <p2 x="1220" y="20"/>
+      <p1 x="1240" y="20"/>
+      <p2 x="1260" y="20"/>
+    </wire>
+    <wire>
+      <p1 x="1160" y="20"/>
+      <p2 x="1180" y="20"/>
     </wire>
     <wire>
       <p1 x="1080" y="20"/>
-      <p2 x="1140" y="20"/>
+      <p2 x="1100" y="20"/>
     </wire>
     <wire>
       <p1 x="500" y="180"/>
@@ -1421,6 +1462,14 @@ N new reset clock ones odd busy
     <wire>
       <p1 x="1000" y="480"/>
       <p2 x="1000" y="500"/>
+    </wire>
+    <wire>
+      <p1 x="1100" y="0"/>
+      <p2 x="1100" y="20"/>
+    </wire>
+    <wire>
+      <p1 x="1180" y="40"/>
+      <p2 x="1180" y="60"/>
     </wire>
     <wire>
       <p1 x="700" y="40"/>
